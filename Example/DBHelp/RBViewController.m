@@ -10,7 +10,7 @@
 
 #import <DBHelp/NSValueBinding.h>
 
-#import <DBHelp/SQLCreation.h>
+#import <DBHelp/SQLTable.h>
 
 #import <DBHelp/SQLSelection.h>
 
@@ -58,6 +58,14 @@
     NSLog(@"%@", select.sqlExpression());
     
 //    select.column
+    
+    
+    
+    SQLTable *table = [SQLTable table:@"table"];
+    
+    table.create.column(@"f", eSQLBindTypeReal).column(@"real", eSQLBindTypeReal).column(@"text", eSQLBindTypeText).column(@"int", eSQLBindTypeInt);
+    
+    NSLog(@"%@", table.create.sqlExpression());
     
     
 }
