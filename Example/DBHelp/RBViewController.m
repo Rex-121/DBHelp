@@ -10,6 +10,10 @@
 
 #import <DBHelp/NSValueBinding.h>
 
+#import <DBHelp/SQLCreation.h>
+
+#import <DBHelp/SQLSelection.h>
+
 @interface RBViewController ()
 
 @end
@@ -19,20 +23,35 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    SQLExpression *x = [SQLExpression new];
-//    x.safe = @"3";
-//    
-//    NSLog(@"%@", x.safe);
+    
     NSString *z = @"3";
-
-//    [(NSString *)z.declareSqlValue isEqualToString:@"3"];
     
     NSLog(@"%@,%@", z.sqlValue, z.sqlType);
     
     NSNumber *x = @3.9;
     NSLog(@"%@,%@", x.sqlValue, x.sqlValueType(eSQLBindTypeReal));
 
-	// Do any additional setup after loading the view, typically from a nib.
+	
+    SQLCreation *sql = [SQLCreation new];
+    
+    sql.column(@"f", eSQLBindTypeReal).column(@"real", eSQLBindTypeReal).column(@"text", eSQLBindTypeText).column(@"int", eSQLBindTypeInt).table(@"test").column(@"real", eSQLBindTypeReal);
+
+    NSLog(@"%@", sql.sqlExpression());
+    
+    NSLog(@"%@", [self dd:sql]);
+    
+    SQLSelection *select = [SQLSelection new];
+    select.table(@"te");
+    
+    NSLog(@"%@", [self dd:select]);
+//    select.column
+    
+    
+}
+
+- (NSString *)dd:(id<SQLPreparation>)sql {
+    sql.table(@"5555");
+    return sql.sqlExpression();
 }
 
 - (void)didReceiveMemoryWarning

@@ -18,9 +18,8 @@ typedef NS_ENUM(NSUInteger, eSQLBindType) {
 
 @protocol SQLBinding <NSObject>
 
-
-
 @end
+
 
 
 @protocol SQLValueBinding<SQLBinding>
