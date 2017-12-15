@@ -8,6 +8,8 @@
 
 #import "RBViewController.h"
 
+#import <DBHelp/NSValueBinding.h>
+
 @interface RBViewController ()
 
 @end
@@ -17,6 +19,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+//    SQLExpression *x = [SQLExpression new];
+//    x.safe = @"3";
+//    
+//    NSLog(@"%@", x.safe);
+    NSString *z = @"3";
+
+//    [(NSString *)z.declareSqlValue isEqualToString:@"3"];
+    
+    NSLog(@"%@,%@", z.sqlValue, z.sqlType);
+    
+    NSNumber *x = @3.9;
+    NSLog(@"%@,%@", x.sqlValue, x.sqlValueType(eSQLBindTypeReal));
+
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
