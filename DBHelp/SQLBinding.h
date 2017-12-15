@@ -28,7 +28,7 @@ typedef NS_ENUM(NSUInteger, eSQLBindType) {
 @property (nonatomic, strong, readonly)NSString *sqlType;
 
 /** SQL 对应的值 */
-@property (nonatomic, strong, readonly)id sqlValue;
+@property (nonatomic, strong, readonly)NSString *sqlValue;
 
 @optional
 

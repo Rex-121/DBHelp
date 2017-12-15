@@ -14,7 +14,7 @@
 }
 
 - (NSString *)sqlValue {
-    return self;
+    return [NSString stringWithFormat:@"'%@'", self];
 }
 
 - (NSString *(^)(eSQLBindType))sqlValueType {
@@ -33,8 +33,8 @@
     return @"REAL";
 }
 
-- (NSNumber *)sqlValue {
-    return self;
+- (NSString *)sqlValue {
+    return self.stringValue;
 }
 
 - (NSString *(^)(eSQLBindType))sqlValueType {

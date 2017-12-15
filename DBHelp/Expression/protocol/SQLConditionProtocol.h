@@ -7,7 +7,9 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol SQLCondition <NSObject>
+
+
+@protocol SQLConditionProtocol <NSObject>
 
 
 

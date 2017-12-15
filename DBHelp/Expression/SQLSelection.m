@@ -7,6 +7,13 @@
 
 #import "SQLSelection.h"
 
+@interface SQLSelection()
+
+/**  */
+@property (nonatomic, strong)SQLWhere *sqlWhere;
+
+@end
+
 @implementation SQLSelection
 
 - (SQLSelection *(^)(NSString *))column {
@@ -32,11 +39,32 @@
             select = @"*";
         }
         
-        return [NSString stringWithFormat:@"SELECT %@ FROM %@", select, self.tableName];
+        NSString *sql = [NSString stringWithFormat:@"SELECT %@ FROM %@", select, self.tableName];
+        
+        if (_sqlWhere) {
+            return [sql stringByAppendingFormat:@" %@;", _sqlWhere.sqlExpression()];
+        }
+        
+        return sql;
         
     };
     
     
+}
+
+-(SQLWhere *)sqlWhere {
+    if (!_sqlWhere) {
+        _sqlWhere = [SQLWhere new];
+    }
+    return _sqlWhere;
+}
+
+
+- (SQLWhere *(^)(NSString *))where {
+    return ^(NSString *c) {
+        self.sqlWhere.column = c;
+        return self.sqlWhere;
+    };
 }
 
 @end

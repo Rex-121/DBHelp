@@ -7,11 +7,13 @@
 
 #import <DBHelp/SQLExpression.h>
 
+#import "SQLCondition.h"
+
 @interface SQLSelection : SQLExpression
 
 
 - (SQLSelection *(^)(NSString *))column;
 
-
+- (SQLWhere *(^)(NSString *column))where;
 
 @end

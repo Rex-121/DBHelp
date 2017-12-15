@@ -44,6 +44,19 @@
     select.table(@"te");
     
     NSLog(@"%@", [self dd:select]);
+    
+    select.column(@"ff").column(@"55");
+    
+    select.where(@"f").between(@"3", @"4");
+    
+    NSLog(@"%@", select.sqlExpression());
+    
+    select.where(@"f").equal(@"4");
+    NSLog(@"%@", select.sqlExpression());
+    
+    select.where(@"f").symbol(@">=", @4);
+    NSLog(@"%@", select.sqlExpression());
+    
 //    select.column
     
     
