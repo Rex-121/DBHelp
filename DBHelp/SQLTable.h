@@ -6,7 +6,12 @@
 //
 
 #import <Foundation/Foundation.h>
+
+
 #import "SQLCreation.h"
+#import "SQLSelection.h"
+
+
 @interface SQLTable : NSObject
 
 
@@ -21,5 +26,8 @@
 
 /**  */
 @property (nonatomic, strong, readonly)SQLCreation *create;
+
+/**  */
+@property (nonatomic, strong)SQLSelection *select;
 
 @end
