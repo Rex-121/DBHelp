@@ -11,6 +11,8 @@
 #import "SQLCreation.h"
 #import "SQLSelection.h"
 
+#import "SQLColumn.h"
+
 
 @interface SQLTable : NSObject
 
@@ -29,5 +31,7 @@
 
 /**  */
 @property (nonatomic, strong)SQLSelection *select;
+
+- (SQLColumn *(^)(NSString *))column;
 
 @end

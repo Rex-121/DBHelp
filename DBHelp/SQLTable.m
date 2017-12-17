@@ -18,6 +18,12 @@
 /**  */
 @property (nonatomic, assign)eSQLOperation operation;
 
+/** 最后一次指定的column */
+@property (nonatomic, strong)SQLColumn *choosenColumn;
+
+/**  */
+@property (nonatomic, strong)NSMutableArray *columnArray;
+
 @end
 
 @implementation SQLTable
@@ -30,6 +36,14 @@
     return t;
 }
 
+- (SQLColumn *(^)(NSString *))column {
+    return ^(NSString *c) {
+        SQLColumn *co = [SQLColumn column:c];
+        _choosenColumn = co;
+        [self.columnArray addObject:co];
+        return co;
+    };
+}
 
 - (SQLCreation *)create {
     return self.creation;
@@ -42,6 +56,13 @@
         _operation = eSQLOperationCreate;
     }
     return _creation;
+}
+
+- (NSMutableArray *)columnArray {
+    if (!_columnArray) {
+        _columnArray = [NSMutableArray array];
+    }
+    return _columnArray;
 }
 
 @end
