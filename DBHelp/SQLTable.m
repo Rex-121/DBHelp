@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong)SQLCreation *creation;
 @property (nonatomic, strong)SQLSelection *selection;
+@property (nonatomic, strong)SQLInsert *insertion;
 
 /**  */
 @property (nonatomic, assign)eSQLOperation operation;
@@ -37,26 +38,6 @@
     return t;
 }
 
-//- (SQLTable *(^)(NSString *))column {
-//    return ^(NSString *c) {
-//        SQLColumn *co = [SQLColumn column:c table:self.tableName];
-//        _choosenColumn = co;
-//        [self.columnArray addObject:co];
-//        return self;
-//    };
-//}
-
-
-
-
-
-//- (NSMutableArray *)columnArray {
-//    if (!_columnArray) {
-//        _columnArray = [NSMutableArray array];
-//    }
-//    return _columnArray;
-//}
-
 - (SQLCreation *)creation {
     if (!_creation) {
         _creation = [SQLCreation creat:_tableName];
@@ -64,7 +45,6 @@
     }
     return _creation;
 }
-
 - (SQLSelection *)selection {
     if (!_selection) {
         _selection = [SQLSelection select:_tableName];
@@ -72,13 +52,12 @@
     }
     return _selection;
 }
-
-//- (SQLTable *)unique {
-//    
-//    
-//    return self;
-//}
-
+- (SQLInsert *)insertion {
+    if (!_insertion) {
+        _insertion = [SQLInsert insert:_tableName];
+    }
+    return _insertion;
+}
 @end
 
 
@@ -89,7 +68,6 @@
 }
 
 
-
 @end
 
 @implementation SQLTable (Select)
@@ -97,4 +75,16 @@
 - (SQLSelection *)select {
     return self.selection;
 }
+
+
+@end
+
+@implementation SQLTable (Insert)
+
+- (SQLInsert *)insert {
+    return self.insertion;
+}
+
+
+
 @end

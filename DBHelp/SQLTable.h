@@ -10,10 +10,9 @@
 
 #import "SQLCreation.h"
 #import "SQLSelection.h"
+#import "SQLInsert.h"
 
-#import "SQLColumn.h"
-
-//#import "SQLConstraint.h"
+//#import "SQLColumn.h"
 
 @interface SQLTable : NSObject
 
@@ -37,9 +36,7 @@
 
 @interface SQLTable (Creation)
 
-/**
- 创建
- */
+/** 创建 */
 @property (nonatomic, strong, readonly)SQLCreation *create;
 
 @end
@@ -47,10 +44,15 @@
 
 @interface SQLTable (Select)
 
-/**
- 查询
- */
+/** 查询 */
 @property (nonatomic, strong, readonly)SQLSelection *select;
+
+@end
+
+@interface SQLTable (Insert)
+
+/** 插入 */
+@property (nonatomic, strong, readonly)SQLInsert *insert;
 
 @end
 

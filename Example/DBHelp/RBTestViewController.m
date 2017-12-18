@@ -36,7 +36,12 @@
     table.select.column(@"1").where(@"2").between(@"1", @"3");
     
     NSLog(@"%@", table.select.sqlExpression());
-    // Do any additional setup after loading the view.
+    
+    ///insert
+    table.insert.columns(@"1", @"2", @"2", @"2", @"2", @3, nil).values(@"3", @5, @56.54566, nil);
+    
+    NSLog(@"%@", table.insert.sqlExpression());
+    
 }
 
 - (void)didReceiveMemoryWarning {
