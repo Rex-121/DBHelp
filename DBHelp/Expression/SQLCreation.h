@@ -9,11 +9,6 @@
 
 @interface SQLCreation : SQLExpression
 
-/**
- 表名
- */
-//- (SQLCreation *(^)(NSString *table))table;
-
 + (instancetype)creat:(NSString *)tableName;
 
 /**
@@ -22,6 +17,6 @@
 - (SQLCreation *(^)(NSString *column, eSQLBindType bind))column;
 
 
-- (NSString *(^)(void))creat;
+//- (NSString *(^)(void))creat;
 
 @end

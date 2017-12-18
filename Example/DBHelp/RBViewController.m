@@ -8,14 +8,10 @@
 
 #import "RBViewController.h"
 
-#import <DBHelp/NSValueBinding.h>
-
-#import <DBHelp/SQLTable.h>
-
-#import <DBHelp/SQLSelection.h>
 
 @interface RBViewController ()
-
+/**  */
+@property (nonatomic, assign)BOOL k;
 @end
 
 @implementation RBViewController
@@ -24,14 +20,9 @@
 {
     [super viewDidLoad];
     
-    SQLTable *table = [SQLTable table:@"table"];
+ 
+    
 
-    ///创建表
-    NSLog(@"%@", table.create.column(@"1", eSQLBindTypeInt).column(@"2", eSQLBindTypeBool).column(@"3", eSQLBindTypeText).sqlExpression());
-
-    table.select.column(@"1").where(@"2").between(@1, @3);
-
-    NSLog(@"%@", table.select.sqlExpression());
     
     
 //    NSString *z = @"3";
@@ -79,12 +70,16 @@
     
     
 }
-
-- (NSString *)dd:(id<SQLPreparation>)sql {
-    sql.table(@"5555");
-    return sql.sqlExpression();
+//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//}
+//- (NSString *)dd:(id<SQLPreparation>)sql {
+//    sql.table(@"5555");
+//    return sql.sqlExpression();
+//}
+- (void)dealloc {
+    NSLog(@"%@", self);
 }
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

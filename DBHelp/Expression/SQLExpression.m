@@ -18,20 +18,8 @@
 @implementation SQLExpression
 
          
-+ (NSString *)transType:(eSQLBindType)type {
-    
-    switch (type) {
-        case eSQLBindTypeText:
-            return @"TEXT";
-        case eSQLBindTypeInt:
-            return @"INT";
-        case eSQLBindTypeBool:
-            return @"INT";
-        case eSQLBindTypeReal:
-            return @"REAL";
-    }
-    
-}
+
+
 + (instancetype)expression:(NSString *)tableName {
     SQLExpression *s = [SQLExpression new];
     s.tableName = tableName;
@@ -52,7 +40,7 @@
     };
 }
 
-- (NSMutableArray *)columnArray {
+- (NSMutableArray<SQLColumn *> *)columnArray {
     if (!_columnArray) {
         _columnArray = [NSMutableArray array];
     }
@@ -65,6 +53,26 @@
         self.table(tableName);
     }
     return self;
+}
+
+- (BOOL)columnExists:(SQLColumn *)column {
+    
+    __block BOOL exist = NO;
+    
+    [self.columnArray enumerateObjectsUsingBlock:^(SQLColumn * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.hash == column.hash) {
+            exist = YES;
+            *stop = YES;
+        }
+    }];
+    
+    return exist;
+}
+
+- (void)addColumnInQueue:(SQLColumn *)column {
+    if (![self columnExists:column]) {
+        [self.columnArray addObject:column];
+    }
 }
 
 @end

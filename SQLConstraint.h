@@ -10,7 +10,7 @@
 @protocol SQLConstraint <NSObject>
 
 
-- (id)unique;
+//- (id)unique;
 
 
 @end

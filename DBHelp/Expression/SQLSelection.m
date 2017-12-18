@@ -19,7 +19,7 @@
 - (SQLSelection *(^)(NSString *))column {
     return ^(NSString *c) {
       
-        [self.columnArray addObject:c];
+         [self addColumnInQueue:[SQLColumn column:c table:self.tableName]];
         
         return self;
     };
@@ -37,7 +37,7 @@
         NSString *select = @"";
         
         if (self.columnArray.count) {
-            select = [self.columnArray componentsJoinedByString:@", "];
+            select = [SQLColumn getSqlExpression:self.columnArray withBind:NO];
         }
         else {
             select = @"*";

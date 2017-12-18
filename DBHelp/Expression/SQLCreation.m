@@ -15,14 +15,6 @@
 
 @implementation SQLCreation
 
-
-//- (SQLCreation *(^)(NSString *))table {
-//    return ^(NSString *t) {
-//        self.tableName = t;
-//        return self;
-//    };
-//}
-
 - (SQLCreation *(^)(NSString *, eSQLBindType))column {
     return ^(NSString *c, eSQLBindType t) {
         
@@ -30,11 +22,9 @@
             return self;
         }
         
-        NSString *typeString = [SQLExpression transType:t];
+        SQLColumn *column = [SQLColumn creatColumn:c bind:t table:self.tableName];
         
-        NSString *combi = [c stringByAppendingFormat:@" %@", typeString];
-        
-        [self.columnArray addObject:combi];
+        [self addColumnInQueue:column];
         
         return self;
     };
@@ -44,16 +34,13 @@
 
 
 
-- (NSString *(^)(void))creat {
-    
-    return ^() {
-        
-        NSString *statementSql = [self.columnArray componentsJoinedByString:@", "];
+- (NSString* )creat {
+
+        NSString *statementSql = [SQLColumn getSqlExpression:self.columnArray withBind:YES];
         
         NSString *define = [NSString stringWithFormat:@"CREAT TABLE %@ ( %@ );", self.tableName, statementSql];
         
         return define;
-    };
     
 }
 
@@ -63,7 +50,7 @@
 
 - (NSString *(^)(void))sqlExpression {
     return ^() {
-        return self.creat();
+        return [self creat];
     };
 }
 

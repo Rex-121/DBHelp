@@ -23,7 +23,7 @@
 @property (nonatomic, strong)SQLColumn *choosenColumn;
 
 /**  */
-@property (nonatomic, strong)NSMutableArray *columnArray;
+//@property (nonatomic, strong)NSMutableArray *columnArray;
 
 @end
 
@@ -37,25 +37,25 @@
     return t;
 }
 
-- (SQLTable *(^)(NSString *))column {
-    return ^(NSString *c) {
-        SQLColumn *co = [SQLColumn column:c];
-        _choosenColumn = co;
-        [self.columnArray addObject:co];
-        return self;
-    };
-}
+//- (SQLTable *(^)(NSString *))column {
+//    return ^(NSString *c) {
+//        SQLColumn *co = [SQLColumn column:c table:self.tableName];
+//        _choosenColumn = co;
+//        [self.columnArray addObject:co];
+//        return self;
+//    };
+//}
 
 
 
 
 
-- (NSMutableArray *)columnArray {
-    if (!_columnArray) {
-        _columnArray = [NSMutableArray array];
-    }
-    return _columnArray;
-}
+//- (NSMutableArray *)columnArray {
+//    if (!_columnArray) {
+//        _columnArray = [NSMutableArray array];
+//    }
+//    return _columnArray;
+//}
 
 - (SQLCreation *)creation {
     if (!_creation) {

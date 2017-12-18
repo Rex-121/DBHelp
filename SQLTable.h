@@ -27,10 +27,8 @@
 + (instancetype)table:(NSString *)table;
 
 
-/**  */
 
-
-- (SQLTable *(^)(NSString *))column;
+//- (SQLTable *(^)(NSString *))column;
 
 //- (SQLTable *)unique;
 

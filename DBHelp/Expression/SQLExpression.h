@@ -17,19 +17,25 @@ typedef NS_ENUM(NSUInteger, eSQLOperation) {
 
 #import "SQLPreparation.h"
 
+#import "SQLColumn.h"
+
 @interface SQLExpression : NSObject<SQLPreparation>
 
 //+ (id)expression:(NSString *)tableName;
 
 - (id)initWithTable:(NSString *)tableName;
 
-+ (NSString *)transType:(eSQLBindType)type;
+
 
 
 /** tableName */
 @property (nonatomic, strong)NSString *tableName;
 
 /** 存储 column */
-@property (nonatomic, strong)NSMutableArray<NSString *> *columnArray;
+@property (nonatomic, strong)NSMutableArray<SQLColumn *> *columnArray;
+
+- (BOOL)columnExists:(SQLColumn *)column;
+
+- (void)addColumnInQueue:(SQLColumn *)column;
 
 @end
