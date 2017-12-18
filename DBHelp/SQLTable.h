@@ -11,8 +11,9 @@
 #import "SQLCreation.h"
 #import "SQLSelection.h"
 #import "SQLInsert.h"
+#import "SQLUpdate.h"
 
-//#import "SQLColumn.h"
+#import "NSValueBinding.h"
 
 @interface SQLTable : NSObject
 
@@ -53,6 +54,13 @@
 
 /** 插入 */
 @property (nonatomic, strong, readonly)SQLInsert *insert;
+
+@end
+
+@interface SQLTable (Update)
+
+/** 更新 */
+@property (nonatomic, strong, readonly)SQLUpdate *update;
 
 @end
 

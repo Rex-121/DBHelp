@@ -34,7 +34,7 @@ typedef NS_ENUM(NSUInteger, eSQLOperation) {
 /** 存储 column */
 @property (nonatomic, strong)NSMutableArray<SQLColumn *> *columnArray;
 
-- (BOOL)columnExists:(SQLColumn *)column;
+- (SQLColumn *)columnExists:(SQLColumn *)column;
 
 - (void)addColumnInQueue:(SQLColumn *)column;
 

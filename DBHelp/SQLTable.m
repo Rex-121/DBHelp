@@ -16,6 +16,7 @@
 @property (nonatomic, strong)SQLCreation *creation;
 @property (nonatomic, strong)SQLSelection *selection;
 @property (nonatomic, strong)SQLInsert *insertion;
+@property (nonatomic, strong)SQLUpdate *updating;
 
 /**  */
 @property (nonatomic, assign)eSQLOperation operation;
@@ -58,6 +59,12 @@
     }
     return _insertion;
 }
+- (SQLUpdate *)updating {
+    if (!_updating) {
+        _updating = [SQLUpdate update:_tableName];
+    }
+    return _updating;
+}
 @end
 
 
@@ -87,4 +94,10 @@
 
 
 
+@end
+
+@implementation SQLTable(Update)
+- (SQLUpdate *)update {
+    return self.updating;
+}
 @end

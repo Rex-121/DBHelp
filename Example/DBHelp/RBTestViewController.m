@@ -9,11 +9,11 @@
 #import "RBTestViewController.h"
 
 
-#import <DBHelp/NSValueBinding.h>
+//#import <DBHelp/NSValueBinding.h>
 
 #import <DBHelp/SQLTable.h>
 
-#import <DBHelp/SQLSelection.h>
+//#import <DBHelp/SQLSelection.h>
 
 @interface RBTestViewController ()
 
@@ -24,24 +24,41 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    CFAbsoluteTime t = CFAbsoluteTimeGetCurrent();
+    
     SQLTable *table = [SQLTable table:@"table"];
     
     ///创建表
     NSLog(@"%@", table.create.column(@"1", eSQLBindTypeInt).column(@"2", eSQLBindTypeBool).column(@"3", eSQLBindTypeText).column(@"1", eSQLBindTypeReal).sqlExpression());
     
+    ///select
     table.select.column(@"1").where(@"2").between(@1, @3);
     
     NSLog(@"%@", table.select.sqlExpression());
     
-    table.select.column(@"1").where(@"2").between(@"1", @"3");
+    table.select.column(@"1").column(@"4").where(@"2").between(@"1", @"3");
     
     NSLog(@"%@", table.select.sqlExpression());
+    
     
     ///insert
     table.insert.columns(@"1", @"2", @"2", @"2", @"2", @3, nil).values(@"3", @5, @56.54566, nil);
     
     NSLog(@"%@", table.insert.sqlExpression());
     
+    
+    ///update
+    table.update.set(@"4", @"update").set(@"56", @4);
+    NSLog(@"%@", table.update.sqlExpression());
+    
+    table.update.set(@"4", @"update").set(@"56", @778).where(@"4").equal(@"f");
+    NSLog(@"%@", table.update.sqlExpression());
+    
+    
+    
+    CFAbsoluteTime tz = CFAbsoluteTimeGetCurrent();
+    
+    NSLog(@"%f", tz - t);
 }
 
 - (void)didReceiveMemoryWarning {

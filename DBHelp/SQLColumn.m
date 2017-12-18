@@ -93,6 +93,13 @@
     
 }
 
+- (NSString *)valueDescription {
+    if (_value == nil) {
+        return @"";
+    }
+    return [NSString stringWithFormat:@"%@ = %@", self.name, self.value.sqlValue];
+}
+
 - (NSUInteger)hash {
     return [self.name hash] & [self.tableName hash];
 }

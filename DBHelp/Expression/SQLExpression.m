@@ -55,13 +55,13 @@
     return self;
 }
 
-- (BOOL)columnExists:(SQLColumn *)column {
+- (SQLColumn *)columnExists:(SQLColumn *)column {
     
-    __block BOOL exist = NO;
+    __block SQLColumn *exist = nil;
     
     [self.columnArray enumerateObjectsUsingBlock:^(SQLColumn * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj.hash == column.hash) {
-            exist = YES;
+            exist = obj;
             *stop = YES;
         }
     }];

@@ -49,4 +49,11 @@
 + (NSString *)getSqlExpression:(NSArray<SQLColumn *> *)columnSet withBind:(BOOL)withBind;
 
 
+/** 对应的值 */
+@property (nonatomic, strong)id<SQLValueBinding> value;
+
+/** column = value  (sql语句) */
+@property (nonatomic, copy, readonly)NSString *valueDescription;
+
+
 @end
