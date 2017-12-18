@@ -15,9 +15,6 @@
  */
 - (id (^)(NSString *table))table;
 
-
-//- (id (^)(NSString *column))column;
-
 /**
  sql 语句
  */

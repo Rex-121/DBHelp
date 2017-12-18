@@ -16,12 +16,12 @@
 @implementation SQLCreation
 
 
-- (SQLCreation *(^)(NSString *))table {
-    return ^(NSString *t) {
-        self.tableName = t;
-        return self;
-    };
-}
+//- (SQLCreation *(^)(NSString *))table {
+//    return ^(NSString *t) {
+//        self.tableName = t;
+//        return self;
+//    };
+//}
 
 - (SQLCreation *(^)(NSString *, eSQLBindType))column {
     return ^(NSString *c, eSQLBindType t) {
@@ -55,6 +55,10 @@
         return define;
     };
     
+}
+
++ (instancetype)creat:(NSString *)tableName {
+    return [[SQLCreation alloc]initWithTable:tableName];
 }
 
 - (NSString *(^)(void))sqlExpression {

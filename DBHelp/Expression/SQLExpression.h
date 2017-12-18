@@ -19,6 +19,9 @@ typedef NS_ENUM(NSUInteger, eSQLOperation) {
 
 @interface SQLExpression : NSObject<SQLPreparation>
 
+//+ (id)expression:(NSString *)tableName;
+
+- (id)initWithTable:(NSString *)tableName;
 
 + (NSString *)transType:(eSQLBindType)type;
 

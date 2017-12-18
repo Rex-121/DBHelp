@@ -7,11 +7,18 @@
 
 #import <Foundation/Foundation.h>
 
+#import "SQLBinding.h"
+
+
+
 @interface SQLColumn : NSObject
 
 
 + (instancetype)column:(NSString *)column;
 
-- (SQLColumn *(^)(NSString *))add;
++ (instancetype)creatColumn:(NSString *)column bind:(eSQLBindType)bind;
+
+- (id)unique;
+
 
 @end

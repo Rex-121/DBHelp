@@ -25,6 +25,10 @@
     };
 }
 
++ (instancetype)select:(NSString *)tableName {
+    return [[SQLSelection alloc]initWithTable:tableName];
+}
+
 
 - (NSString *(^)(void))sqlExpression {
     

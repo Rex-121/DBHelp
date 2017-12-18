@@ -12,8 +12,9 @@
 /**  */
 @property (nonatomic, copy)NSString *tableName;
 
-/**  */
+
 @property (nonatomic, strong)SQLCreation *creation;
+@property (nonatomic, strong)SQLSelection *selection;
 
 /**  */
 @property (nonatomic, assign)eSQLOperation operation;
@@ -36,27 +37,18 @@
     return t;
 }
 
-- (SQLColumn *(^)(NSString *))column {
+- (SQLTable *(^)(NSString *))column {
     return ^(NSString *c) {
         SQLColumn *co = [SQLColumn column:c];
         _choosenColumn = co;
         [self.columnArray addObject:co];
-        return co;
+        return self;
     };
 }
 
-- (SQLCreation *)create {
-    return self.creation;
-}
 
-- (SQLCreation *)creation {
-    if (!_creation) {
-        _creation = [SQLCreation new];
-        _creation.table(_tableName);
-        _operation = eSQLOperationCreate;
-    }
-    return _creation;
-}
+
+
 
 - (NSMutableArray *)columnArray {
     if (!_columnArray) {
@@ -65,4 +57,44 @@
     return _columnArray;
 }
 
+- (SQLCreation *)creation {
+    if (!_creation) {
+        _creation = [SQLCreation creat:_tableName];
+        _operation = eSQLOperationCreate;
+    }
+    return _creation;
+}
+
+- (SQLSelection *)selection {
+    if (!_selection) {
+        _selection = [SQLSelection select:_tableName];
+        _operation = eSQLOperationSelect;
+    }
+    return _selection;
+}
+
+//- (SQLTable *)unique {
+//    
+//    
+//    return self;
+//}
+
+@end
+
+
+@implementation SQLTable (Creation)
+
+- (SQLCreation *)create {
+    return self.creation;
+}
+
+
+
+@end
+
+@implementation SQLTable (Select)
+
+- (SQLSelection *)select {
+    return self.selection;
+}
 @end

@@ -13,6 +13,7 @@
 
 #import "SQLColumn.h"
 
+//#import "SQLConstraint.h"
 
 @interface SQLTable : NSObject
 
@@ -27,11 +28,31 @@
 
 
 /**  */
-@property (nonatomic, strong, readonly)SQLCreation *create;
 
-/**  */
-@property (nonatomic, strong)SQLSelection *select;
 
-- (SQLColumn *(^)(NSString *))column;
+- (SQLTable *(^)(NSString *))column;
+
+//- (SQLTable *)unique;
 
 @end
+
+
+@interface SQLTable (Creation)
+
+/**
+ 创建
+ */
+@property (nonatomic, strong, readonly)SQLCreation *create;
+
+@end
+
+
+@interface SQLTable (Select)
+
+/**
+ 查询
+ */
+@property (nonatomic, strong, readonly)SQLSelection *select;
+
+@end
+

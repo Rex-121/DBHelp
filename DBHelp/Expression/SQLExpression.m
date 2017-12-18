@@ -32,6 +32,11 @@
     }
     
 }
++ (instancetype)expression:(NSString *)tableName {
+    SQLExpression *s = [SQLExpression new];
+    s.tableName = tableName;
+    return s;
+}
 
 - (NSString *(^)(void))sqlExpression {
     return ^() {
@@ -54,12 +59,12 @@
     return _columnArray;
 }
 
-- (id (^)(NSString *))column {
-    return ^(NSString *c) {
-        NSCAssert(NO, @"子类实现");
-        return self;
-    };
+- (id)initWithTable:(NSString *)tableName {
+    self = [super init];
+    if (self) {
+        self.table(tableName);
+    }
+    return self;
 }
-
 
 @end

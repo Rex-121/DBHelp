@@ -11,6 +11,7 @@
 
 @interface SQLSelection : SQLExpression
 
++ (instancetype)select:(NSString *)tableName;
 
 - (SQLSelection *(^)(NSString *))column;
 

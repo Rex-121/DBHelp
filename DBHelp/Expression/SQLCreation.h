@@ -12,8 +12,9 @@
 /**
  表名
  */
-- (SQLCreation *(^)(NSString *table))table;
+//- (SQLCreation *(^)(NSString *table))table;
 
++ (instancetype)creat:(NSString *)tableName;
 
 /**
  字段名

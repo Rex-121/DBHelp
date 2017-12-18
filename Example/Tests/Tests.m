@@ -9,7 +9,7 @@
 // https://github.com/kiwi-bdd/Kiwi
 
 #import <DBHelp/SQLExpression.h>
-
+#import <DBHelp/SQLTable.h>
 SPEC_BEGIN(InitialTests)
 
 describe(@"My initial tests", ^{
@@ -19,15 +19,16 @@ describe(@"My initial tests", ^{
       
 
       it(@"can do maths", ^{
-//          SQLExpression *x = [SQLExpression new];
-//          x.safe = @"3";
+
+          SQLTable *table = [SQLTable table:@"table"];
           
-          NSString *z = @"3";
+          ///创建表
+          NSLog(@"%@", table.create.column(@"1", eSQLBindTypeInt).column(@"2", eSQLBindTypeBool).column(@"3", eSQLBindTypeText).sqlExpression());
           
-          [(NSString *)z.declareSqlValue() isEqualToString:@"3"];
+          table.select.column(@"1").where(@"2").between(@1, @3);
           
-          NSLog(@"%@,%@", z.declareSqlValue, z.declareSqlType);
-//          [x.safe isEqualToString:@"3"];
+          NSLog(@"%@", table.select.sqlExpression());
+          
       });
 
 //      it(@"can read", ^{
