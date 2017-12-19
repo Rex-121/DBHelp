@@ -59,4 +59,24 @@
 
 @end
 
+@implementation NSNull (SQLBind)
+
+- (NSString *)sqlType {
+    return @"NULL";
+}
+
+- (NSString *)sqlValue {
+    return [NSString stringWithFormat:@"null"];
+}
+
+- (NSString *(^)(eSQLBindType))sqlValueType {
+    
+    return ^(eSQLBindType type) {
+        return @"NULL";
+    };
+    
+}
+
+@end
+
 

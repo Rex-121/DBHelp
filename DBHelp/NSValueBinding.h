@@ -11,7 +11,7 @@
 
 @interface NSString (SQLBind)<SQLValueBinding>
 
-@property (nonatomic, strong, readonly)NSString *sqlValue;
+//@property (nonatomic, strong, readonly)NSString *sqlValue;
 
 @end
 
@@ -19,4 +19,10 @@
 
 
 @end
+
+@interface NSNull (SQLBind)<SQLValueBinding>
+
+@end
+
+
 
