@@ -25,6 +25,9 @@
 @property (nonatomic, assign)BOOL isUnique;
 /** 是否 标记 不可为空 */
 @property (nonatomic, assign)BOOL notNullAble;
+/** 是否有默认值 */
+@property (nonatomic, strong)id<SQLValueBinding>defaltV;
+
 @end
 
 
@@ -50,12 +53,14 @@
     switch (type) {
         case eSQLBindTypeText:
             return @"TEXT";
-        case eSQLBindTypeInt:
-            return @"INT";
+        case eSQLBindTypeInteger:
+            return @"INTEGER";
         case eSQLBindTypeBool:
-            return @"INT";
+            return @"INTEGER";
         case eSQLBindTypeReal:
             return @"REAL";
+        case eSQLBindTypeBlob:
+            return @"BLOB";
     }
 }
 
@@ -66,11 +71,10 @@
 
 - (NSString *(^)(void))sqlExpression {
     return ^() {
-        NSString *typeString = [SQLColumn transType:_bind];
-        
-        NSString *combi = [self.description stringByAppendingFormat:@" %@", typeString];
-        
-        return combi;
+        if (_value == nil) {
+            return @"";
+        }
+        return [NSString stringWithFormat:@"%@ = %@", self.name, self.value.sqlValue];
     };
 }
 
@@ -93,7 +97,7 @@
         }
         else {
             
-            NSString *sql = obj.sqlExpression();
+            NSString *sql = obj.valueDescription;
             
             if (obj.isPrimaryKey) {
                 sql = [sql stringByAppendingString:@" PRIMARY KEY"];
@@ -105,6 +109,9 @@
             if (obj.notNullAble) {
                 sql = [sql stringByAppendingString:@" NOT NULL"];
             }
+            if (obj.defaltV) {
+                sql = [sql stringByAppendingFormat:@" DEFAULT %@", obj.defaltV.sqlValue];
+            }
             
             [array addObject:sql];
         }
@@ -115,10 +122,11 @@
 }
 
 - (NSString *)valueDescription {
-    if (_value == nil) {
-        return @"";
-    }
-    return [NSString stringWithFormat:@"%@ = %@", self.name, self.value.sqlValue];
+    NSString *typeString = [SQLColumn transType:_bind];
+    
+    NSString *combi = [self.description stringByAppendingFormat:@" %@", typeString];
+    
+    return combi;
 }
 
 - (NSUInteger)hash {
@@ -152,5 +160,10 @@
         return self;
     };
 }
-
+- (SQLColumn *(^)(id<SQLValueBinding>))defaultValue {
+    return ^(id<SQLValueBinding>v) {
+        self.defaltV = v;
+        return self;
+    };
+}
 @end

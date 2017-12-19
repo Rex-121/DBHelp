@@ -26,17 +26,19 @@
     
     CFAbsoluteTime t = CFAbsoluteTimeGetCurrent();
     
-    SQLTable *table = [SQLTable table:@"table"];
+    SQLTable *table = [SQLTable table:@"tagg"];
     
-    table.create.column(@"1", eSQLBindTypeInt).tableIfNotExits().newColumn(@"2", eSQLBindTypeBool).unique().notNull();
-    table.create.column(@"3", eSQLBindTypeText).column(@"1", eSQLBindTypeReal).newColumn(@"4", eSQLBindTypeReal).primaryKey().notNull();
-    table.create.newColumn(@"5", eSQLBindTypeInt).notNull();
+    table.create.newColumn(@"id", eSQLBindTypeInteger).primaryKey();
+    table.create.newColumn(@"name", eSQLBindTypeText).unique().notNull();
+    table.create.column(@"age", eSQLBindTypeInteger);
+    table.create.newColumn(@"company", eSQLBindTypeText).defaultValue(@"home");
+    table.create.newColumn(@"createtime", eSQLBindTypeReal);
     
     ///创建表
     NSLog(@"%@", table.create.sqlExpression());
     
     ///select
-    table.select.column(@"1").where(@"2").between(@1, @3);
+    table.select.where(@"age").equal(@28);
     
     NSLog(@"%@", table.select.sqlExpression());
     
@@ -46,7 +48,7 @@
     
     
     ///insert
-    table.insert.columns(@"1", @"2", @"2", @"2", @"2", @3, nil).values([NSNull null], @"3", @5, @56.54566, nil);
+    table.insert.columns(@"id", @"name", @"age", @"company", @"createtime", nil).values([NSNull null], @"Ray", @28, [NSNull null], @4145123.4, nil);
     
     NSLog(@"%@", table.insert.sqlExpression());
     

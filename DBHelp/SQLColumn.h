@@ -74,6 +74,9 @@
 /** 值 是否为 唯一 */
 - (SQLColumn *(^)(void))unique;
 
+/** 是否有默认值 */
+- (SQLColumn *(^)(id<SQLValueBinding>value))defaultValue;
+
 @end
 
 

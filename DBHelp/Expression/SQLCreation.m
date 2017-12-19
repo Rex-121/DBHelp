@@ -54,9 +54,11 @@
     
     NSString *exists = _ifTableExists ? @"IF NOT EXISTS" : @"";
     
-    NSString *define = [NSString stringWithFormat:@"CREAT TABLE %@ %@ ( %@ );", exists, self.tableName, statementSql];
+    if (exists.length) {
+        return [NSString stringWithFormat:@"CREATE TABLE %@ %@ ( %@ );", exists, self.tableName, statementSql];
+    }
     
-    return define;
+    return [NSString stringWithFormat:@"CREATE TABLE %@ ( %@ );", self.tableName, statementSql];
     
 }
 

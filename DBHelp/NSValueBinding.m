@@ -42,14 +42,16 @@
     return ^(eSQLBindType type) {
         
         switch (type) {
-            case eSQLBindTypeInt:
-                return @"INT";
-            case eSQLBindTypeBool:
-                return @"INT";
-            case eSQLBindTypeReal:
-                return @"REAL";
             case eSQLBindTypeText:
                 return @"TEXT";
+            case eSQLBindTypeInteger:
+                return @"INTEGER";
+            case eSQLBindTypeBool:
+                return @"INTEGER";
+            case eSQLBindTypeReal:
+                return @"REAL";
+            case eSQLBindTypeBlob:
+                return @"BLOB";
         }
         
     };
