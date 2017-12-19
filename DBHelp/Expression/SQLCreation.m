@@ -9,7 +9,8 @@
 
 @interface SQLCreation()
 
-
+/**  */
+@property (nonatomic, assign)BOOL ifTableExists;
 
 @end
 
@@ -30,17 +31,32 @@
     };
 }
 
+- (SQLColumn *(^)(NSString *, eSQLBindType))newColumn {
+    return ^(NSString *c, eSQLBindType t) {
+        
+//        if (c == NULL) {
+//            return nil;
+//        }
 
+        SQLColumn *column = [SQLColumn creatColumn:c bind:t table:self.tableName];
+
+        [self addColumnInQueue:column];
+        
+        return column;
+    };
+}
 
 
 
 - (NSString* )creat {
 
-        NSString *statementSql = [SQLColumn getSqlExpression:self.columnArray withBind:YES];
-        
-        NSString *define = [NSString stringWithFormat:@"CREAT TABLE %@ ( %@ );", self.tableName, statementSql];
-        
-        return define;
+    NSString *statementSql = [SQLColumn getSqlExpression:self.columnArray withBind:YES];
+    
+    NSString *exists = _ifTableExists ? @"IF NOT EXISTS" : @"";
+    
+    NSString *define = [NSString stringWithFormat:@"CREAT TABLE %@ %@ ( %@ );", exists, self.tableName, statementSql];
+    
+    return define;
     
 }
 
@@ -51,6 +67,13 @@
 - (NSString *(^)(void))sqlExpression {
     return ^() {
         return [self creat];
+    };
+}
+
+- (SQLCreation *(^)(void))tableIfNotExits {
+    return ^() {
+        self.ifTableExists = YES;
+        return self;
     };
 }
 

@@ -28,8 +28,12 @@
     
     SQLTable *table = [SQLTable table:@"table"];
     
+    table.create.column(@"1", eSQLBindTypeInt).tableIfNotExits().newColumn(@"2", eSQLBindTypeBool).unique().notNull();
+    table.create.column(@"3", eSQLBindTypeText).column(@"1", eSQLBindTypeReal).newColumn(@"4", eSQLBindTypeReal).primaryKey().notNull();
+    table.create.newColumn(@"5", eSQLBindTypeInt).notNull();
+    
     ///创建表
-    NSLog(@"%@", table.create.column(@"1", eSQLBindTypeInt).column(@"2", eSQLBindTypeBool).column(@"3", eSQLBindTypeText).column(@"1", eSQLBindTypeReal).column(@"4", eSQLBindTypeReal).sqlExpression());
+    NSLog(@"%@", table.create.sqlExpression());
     
     ///select
     table.select.column(@"1").where(@"2").between(@1, @3);

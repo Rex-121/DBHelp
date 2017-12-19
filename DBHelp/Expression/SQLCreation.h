@@ -17,6 +17,9 @@
 - (SQLCreation *(^)(NSString *column, eSQLBindType bind))column;
 
 
-//- (NSString *(^)(void))creat;
+- (SQLColumn *(^)(NSString *column, eSQLBindType bind))newColumn;
+
+
+- (SQLCreation *(^)(void))tableIfNotExits;
 
 @end

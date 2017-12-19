@@ -57,3 +57,44 @@
 
 
 @end
+
+
+
+@interface SQLColumn (Constraint)
+
+
+/** 可否为空 */
+- (SQLColumn *(^)(void))notNull;
+
+
+/** 是否是 主键 */
+- (SQLColumn *(^)(void))primaryKey;
+
+
+/** 值 是否为 唯一 */
+- (SQLColumn *(^)(void))unique;
+
+@end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

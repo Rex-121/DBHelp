@@ -19,7 +19,14 @@
 /** bind */
 @property (nonatomic, assign)eSQLBindType bind;
 
+/** 是否是主键 */
+@property (nonatomic, assign)BOOL isPrimaryKey;
+/** 是否是唯一值 */
+@property (nonatomic, assign)BOOL isUnique;
+/** 是否 标记 不可为空 */
+@property (nonatomic, assign)BOOL notNullAble;
 @end
+
 
 @implementation SQLColumn
 
@@ -85,7 +92,21 @@
             [array addObject:obj.name];
         }
         else {
-            [array addObject:obj.sqlExpression()];
+            
+            NSString *sql = obj.sqlExpression();
+            
+            if (obj.isPrimaryKey) {
+                sql = [sql stringByAppendingString:@" PRIMARY KEY"];
+            }
+            else if (obj.isUnique) {
+                sql = [sql stringByAppendingString:@" UNIQUE"];
+            }
+            
+            if (obj.notNullAble) {
+                sql = [sql stringByAppendingString:@" NOT NULL"];
+            }
+            
+            [array addObject:sql];
         }
     }];
     
@@ -102,6 +123,34 @@
 
 - (NSUInteger)hash {
     return [self.name hash] & [self.tableName hash];
+}
+
+@end
+
+
+@implementation SQLColumn (Constraint)
+
+
+- (SQLColumn *(^)(void))notNull {
+    return ^() {
+        self.notNullAble = YES;
+        return self;
+    };
+}
+
+- (SQLColumn *(^)(void))primaryKey {
+    return ^() {
+        self.isPrimaryKey = YES;
+        
+        return self;
+    };
+}
+
+- (SQLColumn *(^)(void))unique {
+    return ^() {
+        self.isUnique = YES;
+        return self;
+    };
 }
 
 @end
