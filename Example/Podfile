@@ -3,6 +3,9 @@ use_frameworks!
 target 'DBHelp_Example' do
   pod 'DBHelp', :path => '../'
 
+pod 'FMDB'
+
+
   target 'DBHelp_Tests' do
     inherit! :search_paths
 
