@@ -72,7 +72,7 @@
 - (NSString *(^)(void))sqlExpression {
     return ^() {
         if (_value == nil) {
-            return @"";
+            return self.description;
         }
         return [NSString stringWithFormat:@"%@ = %@", self.name, self.value.sqlValue];
     };

@@ -58,7 +58,7 @@
         NSMutableArray *array = [NSMutableArray array];
         
         [self.columnArray enumerateObjectsUsingBlock:^(SQLColumn * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [array addObject:obj.description];
+            [array addObject:obj.sqlExpression()];
         }];
         
         NSString *update = [NSString stringWithFormat:@"UPDATE %@ SET %@", self.tableName, [array componentsJoinedByString:@", "]];
