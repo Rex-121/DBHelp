@@ -27,9 +27,6 @@ typedef NS_ENUM(NSUInteger, eSQLOperation) {
 
 - (id)initWithTable:(NSString *)tableName;
 
-
-
-
 /** tableName */
 @property (nonatomic, strong)NSString *tableName;
 
@@ -39,5 +36,15 @@ typedef NS_ENUM(NSUInteger, eSQLOperation) {
 - (SQLColumn *)columnExists:(SQLColumn *)column;
 
 - (void)addColumnInQueue:(SQLColumn *)column;
+
+@end
+
+
+@interface SQLSearchExpression : SQLExpression <SQLSearchCondition>
+
+
+/**  */
+@property (nonatomic, strong)SQLWhere *sqlWhere;
+
 
 @end

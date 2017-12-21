@@ -7,7 +7,6 @@
 
 #import "SQLExpression.h"
 
-#import "SQLExpression+Where.h"
 
 
 @implementation SQLExpression
@@ -69,6 +68,23 @@
 
 
 
+
+
+
+@end
+
+
+#pragma mark -
+
+
+@interface SQLSearchExpression ()
+
+
+
+@end
+
+@implementation SQLSearchExpression
+
 -(SQLWhere *)sqlWhere {
     if (!_sqlWhere) {
         _sqlWhere = [SQLWhere new];
@@ -76,5 +92,11 @@
     return _sqlWhere;
 }
 
+- (SQLWhere *(^)(NSString *))where {
+    return ^(NSString *c) {
+        self.sqlWhere.column = c;
+        return self.sqlWhere;
+    };
+}
 
 @end

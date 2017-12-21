@@ -9,7 +9,7 @@
 
 
 
-@interface SQLUpdate : SQLExpression<SQLSearchCondition>
+@interface SQLUpdate : SQLSearchExpression
 
 + (instancetype)update:(NSString *)tableName;
 

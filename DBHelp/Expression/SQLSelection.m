@@ -7,13 +7,15 @@
 
 #import "SQLSelection.h"
 
-#import "SQLExpression+Where.h"
 
 @interface SQLSelection()
 
 
 /**  */
 @property (nonatomic, assign)BOOL doCount;
+
+/** column as 别名 */
+@property (nonatomic, strong)NSString *asColumn;
 
 @end
 
@@ -24,6 +26,13 @@
       
          [self addColumnInQueue:[SQLColumn column:c table:self.tableName]];
         
+        return self;
+    };
+}
+
+- (SQLSelection *(^)(NSString *, NSString *))columnAsAlias {
+    return ^(NSString *c, NSString *a) {
+        [self addColumnInQueue:[SQLColumn column:c alias:a table:self.tableName]];
         return self;
     };
 }
@@ -67,12 +76,7 @@
     
 }
 
-- (SQLWhere *(^)(NSString *))where {
-    return ^(NSString *c) {
-        self.sqlWhere.column = c;
-        return self.sqlWhere;
-    };
-}
+
 
 @end
 
@@ -82,5 +86,7 @@
     _doCount = YES;
     return self;
 }
+
+
 
 @end

@@ -8,11 +8,14 @@
 #import "SQLExpression.h"
 
 
-@interface SQLSelection : SQLExpression<SQLSearchCondition>
+@interface SQLSelection : SQLSearchExpression
 
 + (instancetype)select:(NSString *)tableName;
 
 - (SQLSelection *(^)(NSString *))column;
+
+/** 别名 */
+- (SQLSelection *(^)(NSString *column, NSString *alias))columnAsAlias;
 
 
 @end

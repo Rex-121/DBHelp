@@ -28,6 +28,16 @@
  创建
  
  @param column 列名
+ @param alias 别名
+ @param table 表名
+ @return column
+ */
++ (instancetype)column:(NSString *)column alias:(NSString *)alias table:(NSString *)table;
+
+/**
+ 创建
+ 
+ @param column 列名
  @param table 表名
  @param bind 绑定的值类型
  @return column

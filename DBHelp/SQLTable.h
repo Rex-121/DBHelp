@@ -12,6 +12,7 @@
 #import "SQLSelection.h"
 #import "SQLInsert.h"
 #import "SQLUpdate.h"
+#import "SQLDelete.h"
 
 
 #import "NSValueBinding.h"
@@ -62,6 +63,14 @@
 
 /** 更新 */
 @property (nonatomic, strong, readonly)SQLUpdate *update;
+
+@end
+
+
+@interface SQLTable (Delete)
+
+/** 删除 */
+@property (nonatomic, strong, readonly)SQLDelete *deleteColumn;
 
 @end
 

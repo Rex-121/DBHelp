@@ -7,7 +7,6 @@
 
 #import "SQLUpdate.h"
 
-#import "SQLExpression+Where.h"
 
 @interface SQLUpdate()
 
@@ -36,16 +35,6 @@
         [self addColumnInQueue:column];
         
         return self;
-    };
-}
-
-
-
-
-- (SQLWhere *(^)(NSString *))where {
-    return ^(NSString *c) {
-        self.sqlWhere.column = c;
-        return self.sqlWhere;
     };
 }
 

@@ -16,6 +16,9 @@
 /** columnName */
 @property (nonatomic, strong)NSString *name;
 
+/** 别名 */
+@property (nonatomic, strong)NSString *alias;
+
 /** bind */
 @property (nonatomic, assign)eSQLBindType bind;
 
@@ -42,6 +45,14 @@
     return c;
 }
 
++ (instancetype)column:(NSString *)column alias:(NSString *)alias table:(NSString *)table {
+    SQLColumn *c = [self column:column table:table];
+    if (alias != NULL && alias.length) {
+        c.alias = alias;
+    }
+    return c;
+}
+
 + (instancetype)creatColumn:(NSString *)column bind:(eSQLBindType)bind table:(NSString *)table {
     SQLColumn *c = [self column:column table:table];
     c.bind = bind;
@@ -65,6 +76,11 @@
 }
 
 - (NSString *)description {
+    
+    if (_alias != NULL) {
+        return [NSString stringWithFormat:@"%@ AS %@", self.name, _alias];
+    }
+    
     return self.name;
 }
 
@@ -93,7 +109,7 @@
     
     [columnSet enumerateObjectsUsingBlock:^(SQLColumn * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (!withBind) {
-            [array addObject:obj.name];
+            [array addObject:obj.description];
         }
         else {
             

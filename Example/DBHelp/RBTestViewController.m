@@ -42,7 +42,7 @@
     
     NSLog(@"%@", table.select.sqlExpression());
     
-    table.select.column(@"1").count.column(@"4").where(@"2").between(@"1", @"3");
+    table.select.column(@"1").count.columnAsAlias(@"4", @"").columnAsAlias(@"3", @"3别名").where(@"2").between(@"1", @"3");
     
     NSLog(@"%@", table.select.sqlExpression());
     
