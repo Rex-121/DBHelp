@@ -39,4 +39,13 @@
  */
 - (void (^)(NSString *symbol, id<SQLValueBinding> value))symbol;
 
+
+
+/**
+ 是否是正常的sql语句
+
+ @return 是否
+ */
+@property (nonatomic, assign, readonly)BOOL isWhereWork;
+
 @end

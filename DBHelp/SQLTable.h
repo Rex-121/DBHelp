@@ -13,6 +13,7 @@
 #import "SQLInsert.h"
 #import "SQLUpdate.h"
 
+
 #import "NSValueBinding.h"
 
 @interface SQLTable : NSObject
@@ -63,4 +64,7 @@
 @property (nonatomic, strong, readonly)SQLUpdate *update;
 
 @end
+
+
+
 

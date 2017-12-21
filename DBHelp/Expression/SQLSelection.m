@@ -7,10 +7,13 @@
 
 #import "SQLSelection.h"
 
+#import "SQLExpression+Where.h"
+
 @interface SQLSelection()
 
+
 /**  */
-@property (nonatomic, strong)SQLWhere *sqlWhere;
+@property (nonatomic, assign)BOOL doCount;
 
 @end
 
@@ -43,10 +46,18 @@
             select = @"*";
         }
         
-        NSString *sql = [NSString stringWithFormat:@"SELECT %@ FROM %@", select, self.tableName];
+        NSString *sql = @"";
         
-        if (_sqlWhere) {
-            return [sql stringByAppendingFormat:@" %@;", _sqlWhere.sqlExpression()];
+        if (_doCount) {
+            ///如果是统计数目
+            sql = [NSString stringWithFormat:@"SELECT COUNT(%@) FROM %@", select, self.tableName];
+        }
+        else {
+            sql = [NSString stringWithFormat:@"SELECT %@ FROM %@", select, self.tableName];
+        }
+        
+        if (self.sqlWhere.isWhereWork) {
+            return [sql stringByAppendingFormat:@" %@;", self.sqlWhere.sqlExpression()];
         }
         
         return sql;
@@ -56,19 +67,20 @@
     
 }
 
--(SQLWhere *)sqlWhere {
-    if (!_sqlWhere) {
-        _sqlWhere = [SQLWhere new];
-    }
-    return _sqlWhere;
-}
-
-
 - (SQLWhere *(^)(NSString *))where {
     return ^(NSString *c) {
         self.sqlWhere.column = c;
         return self.sqlWhere;
     };
+}
+
+@end
+
+@implementation SQLSelection (Count)
+
+- (SQLSelection *)count {
+    _doCount = YES;
+    return self;
 }
 
 @end

@@ -5,16 +5,21 @@
 //  Created by Ray Boring on 2017/12/15.
 //
 
-#import <DBHelp/SQLExpression.h>
+#import "SQLExpression.h"
 
-#import "SQLCondition.h"
 
-@interface SQLSelection : SQLExpression
+@interface SQLSelection : SQLExpression<SQLSearchCondition>
 
 + (instancetype)select:(NSString *)tableName;
 
 - (SQLSelection *(^)(NSString *))column;
 
-- (SQLWhere *(^)(NSString *column))where;
 
 @end
+
+@interface SQLSelection (Count)
+
+- (SQLSelection *)count;
+
+@end
+

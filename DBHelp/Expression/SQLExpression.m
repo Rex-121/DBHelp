@@ -7,21 +7,13 @@
 
 #import "SQLExpression.h"
 
+#import "SQLExpression+Where.h"
 
-@interface SQLExpression()
-
-
-
-
-@end
 
 @implementation SQLExpression
 
-         
-
-
 + (instancetype)expression:(NSString *)tableName {
-    SQLExpression *s = [SQLExpression new];
+    SQLExpression *s = [self new];
     s.tableName = tableName;
     return s;
 }
@@ -74,5 +66,15 @@
         [self.columnArray addObject:column];
     }
 }
+
+
+
+-(SQLWhere *)sqlWhere {
+    if (!_sqlWhere) {
+        _sqlWhere = [SQLWhere new];
+    }
+    return _sqlWhere;
+}
+
 
 @end

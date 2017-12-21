@@ -18,6 +18,7 @@
 @property (nonatomic, strong)SQLInsert *insertion;
 @property (nonatomic, strong)SQLUpdate *updating;
 
+
 /**  */
 @property (nonatomic, assign)eSQLOperation operation;
 
@@ -96,8 +97,9 @@
 
 @end
 
-@implementation SQLTable(Update)
+@implementation SQLTable (Update)
 - (SQLUpdate *)update {
     return self.updating;
 }
 @end
+

@@ -7,10 +7,12 @@
 
 #import "SQLUpdate.h"
 
+#import "SQLExpression+Where.h"
+
 @interface SQLUpdate()
 
 
-@property (nonatomic, strong)SQLWhere *sqlWhere;
+//@property (nonatomic, strong)SQLWhere *sqlWhere;
 @end
 
 @implementation SQLUpdate
@@ -37,12 +39,7 @@
     };
 }
 
--(SQLWhere *)sqlWhere {
-    if (!_sqlWhere) {
-        _sqlWhere = [SQLWhere new];
-    }
-    return _sqlWhere;
-}
+
 
 
 - (SQLWhere *(^)(NSString *))where {
@@ -63,8 +60,8 @@
         
         NSString *update = [NSString stringWithFormat:@"UPDATE %@ SET %@", self.tableName, [array componentsJoinedByString:@", "]];
         
-        if (_sqlWhere) {
-            return [update stringByAppendingFormat:@" %@", _sqlWhere.sqlExpression()];
+        if (self.sqlWhere.isWhereWork) {
+            return [update stringByAppendingFormat:@" %@", self.sqlWhere.sqlExpression()];
         }
 
         return update;

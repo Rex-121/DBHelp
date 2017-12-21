@@ -7,14 +7,13 @@
 
 #import "SQLExpression.h"
 
-#import "SQLCondition.h"
 
-@interface SQLUpdate : SQLExpression
+
+@interface SQLUpdate : SQLExpression<SQLSearchCondition>
 
 + (instancetype)update:(NSString *)tableName;
 
 - (SQLUpdate *(^)(NSString *column, id<SQLValueBinding> value))set;
 
-- (SQLWhere *(^)(NSString *column))where;
 
 @end

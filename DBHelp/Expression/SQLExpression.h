@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "SQLSearchCondition.h"
+
 typedef NS_ENUM(NSUInteger, eSQLOperation) {
     eSQLOperationSelect  =  0,
     eSQLOperationUpdate,
@@ -21,7 +23,7 @@ typedef NS_ENUM(NSUInteger, eSQLOperation) {
 
 @interface SQLExpression : NSObject<SQLPreparation>
 
-//+ (id)expression:(NSString *)tableName;
++ (id)expression:(NSString *)tableName;
 
 - (id)initWithTable:(NSString *)tableName;
 

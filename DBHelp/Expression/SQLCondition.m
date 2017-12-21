@@ -16,6 +16,9 @@
 /**  */
 @property (nonatomic, copy)NSString *sqlStatement;
 
+/**  */
+@property (nonatomic, assign)BOOL valueExists;
+
 @end
 
 @implementation SQLWhere
@@ -48,6 +51,11 @@
 }
 
 - (void)appendCondition:(NSString *)condition {
+    
+    if (condition.length) {
+        _valueExists = YES;
+    }
+    
     self.sqlStatement = [self.sqlStatement stringByAppendingFormat:@" %@", condition];
 }
 
@@ -61,6 +69,12 @@
     return ^(NSString *z) {
         return @"";
     };
+}
+
+- (BOOL)isWhereWork {
+    
+    return _valueExists && (_column.length > 0);
+    
 }
 
 @end
