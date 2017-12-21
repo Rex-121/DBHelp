@@ -17,7 +17,7 @@
 @property (nonatomic, strong)SQLSelection *selection;
 @property (nonatomic, strong)SQLInsert *insertion;
 @property (nonatomic, strong)SQLUpdate *updating;
-
+@property (nonatomic, strong)SQLDelete *deleteC;
 
 /**  */
 @property (nonatomic, assign)eSQLOperation operation;
@@ -66,6 +66,12 @@
     }
     return _updating;
 }
+- (SQLDelete *)deleteC {
+    if (!_deleteC) {
+        _deleteC = [SQLDelete deleteFrom:_tableName];
+    }
+    return _deleteC;
+}
 @end
 
 
@@ -101,5 +107,13 @@
 - (SQLUpdate *)update {
     return self.updating;
 }
+@end
+
+@implementation SQLTable (Delete)
+
+- (SQLDelete *)deleteColumn {
+    return self.deleteC;
+}
+
 @end
 

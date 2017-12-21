@@ -61,6 +61,14 @@
     NSLog(@"%@", table.update.sqlExpression());
     
     
+    ///delete
+    
+    NSLog(@"%@", table.deleteColumn.sqlExpression());
+    
+    table.deleteColumn.where(@"4").symbol(@">", @4);
+    
+    NSLog(@"%@", table.deleteColumn.sqlExpression());
+    
     
     CFAbsoluteTime tz = CFAbsoluteTimeGetCurrent();
 //    [self createDataBase];

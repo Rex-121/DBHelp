@@ -9,6 +9,6 @@
 
 @interface SQLDelete : SQLSearchExpression
 
-
++ (id)deleteFrom:(NSString *)tableName;
 
 @end
