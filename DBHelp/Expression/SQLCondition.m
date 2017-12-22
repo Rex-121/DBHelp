@@ -79,6 +79,11 @@
     return [self appendCondition:[NSString stringWithFormat:@"IN (%@)", [array componentsJoinedByString:@", "]]];
 }
 
+- (id<SQLAndOrAddition>)inRangeWithArray:(NSArray<id<SQLValueBinding>> *)array {
+    return [self appendCondition:[NSString stringWithFormat:@"IN (%@)", [array componentsJoinedByString:@", "]]];
+}
+
+
 - (void)setColumn:(NSString *)column {
     _column = column;
     

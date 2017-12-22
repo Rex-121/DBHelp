@@ -70,7 +70,7 @@
 
 - (id<SQLAndOrAddition>)inRange:(id<SQLValueBinding>)value, ... NS_REQUIRES_NIL_TERMINATION;
 
-//- (id<SQLAndOrAddition>)inRange:(va_list)list;
+- (id<SQLAndOrAddition>)inRangeWithArray:(NSArray<id<SQLValueBinding>> *)array;
 
 
 /**
