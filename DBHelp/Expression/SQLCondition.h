@@ -16,6 +16,34 @@
 #import "SQLBinding.h"
 #import "SQLPreparation.h"
 
+@class SQLWhere;
+@protocol SQLAndOrAddition
+
+- (SQLWhere *(^)(NSString *c))andCondition;
+
+- (SQLWhere *(^)(NSString *c))orCondition;
+
+@end
+
+#pragma mark - -----------and  or------------
+
+@interface SQLAndOrCondition : NSObject<SQLAndOrAddition, SQLPreparation>
+
+/**  */
+@property (nonatomic, assign, readonly)BOOL isAndCondition;
+
+/**  */
+@property (nonatomic, readonly)BOOL work;
+
+@end
+
+#pragma mark -----------------------
+
+
+
+#pragma mark - SQL where
+
+
 @interface SQLWhere : NSObject<SQLPreparation>
 
 /** 查询的列表 */
@@ -25,19 +53,19 @@
 /**
  between and (在 之间的值)
  */
-- (void (^)(id<SQLValueBinding> from, id<SQLValueBinding> to))between;
+- (id<SQLAndOrAddition> (^)(id<SQLValueBinding> from, id<SQLValueBinding> to))between;
 
 
 /**
  等于 value 的数据
  */
-- (void (^)(id<SQLValueBinding> value))equal;
+- (id<SQLAndOrAddition> (^)(id<SQLValueBinding> value))equal;
 
 /**
  条件：列，比较运算符，值
  比较运算符包涵：= > < >= ,<=, !=,<> 表示（不等于）
  */
-- (void (^)(NSString *symbol, id<SQLValueBinding> value))symbol;
+- (id<SQLAndOrAddition> (^)(NSString *symbol, id<SQLValueBinding> value))symbol;
 
 
 
@@ -49,3 +77,9 @@
 @property (nonatomic, assign, readonly)BOOL isWhereWork;
 
 @end
+
+
+
+
+
+
