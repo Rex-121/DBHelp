@@ -81,6 +81,7 @@
             
         }
         
+        va_end(list);
     
         return self;
     };

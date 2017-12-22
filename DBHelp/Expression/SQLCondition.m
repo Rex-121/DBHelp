@@ -56,6 +56,29 @@
     };
 }
 
+- (id<SQLAndOrAddition>)inRange:(id<SQLValueBinding>)value, ... {
+    
+    va_list list;
+    
+    va_start(list, value);
+    
+    id obj;
+    NSMutableArray *array = [NSMutableArray array];
+    
+    [array addObject:value];
+    
+    while ((obj = va_arg(list, id))) {
+        if ([obj conformsToProtocol:@protocol(SQLValueBinding)]) {
+            id<SQLValueBinding>v = obj;
+            [array addObject:v.sqlValue];
+        }
+    }
+    
+    va_end(list);
+    
+    return [self appendCondition:[NSString stringWithFormat:@"IN (%@)", [array componentsJoinedByString:@", "]]];
+}
+
 - (void)setColumn:(NSString *)column {
     _column = column;
     

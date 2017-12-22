@@ -69,9 +69,15 @@
     
     NSLog(@"%@", table.deleteColumn.sqlExpression());
     
-    table.deleteColumn.where(@"4").symbol(@">", @4).andCondition(@"k").equal(@"z").andCondition(@"4").symbol(@">", @5).andCondition(@"3").between(@5, @6);
+    table.select.where(@"4").symbol(@">", @4).andCondition(@"k").equal(@"z").andCondition(@"4").symbol(@">", @5).andCondition(@"3").between(@5, @6);
     
-    NSLog(@"%@", table.deleteColumn.sqlExpression());
+    NSLog(@"%@", table.select.sqlExpression());
+    
+    
+    
+    [table.select.where(@"4").symbol(@">", @4).andCondition(@"5") inRange:@3, @"4", @4555, @5, nil];
+    
+    NSLog(@"%@", table.select.sqlExpression());
     
     CFAbsoluteTime tz = CFAbsoluteTimeGetCurrent();
 //    [self createDataBase];

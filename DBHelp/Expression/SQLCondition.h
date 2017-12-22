@@ -68,6 +68,10 @@
 - (id<SQLAndOrAddition> (^)(NSString *symbol, id<SQLValueBinding> value))symbol;
 
 
+- (id<SQLAndOrAddition>)inRange:(id<SQLValueBinding>)value, ... NS_REQUIRES_NIL_TERMINATION;
+
+//- (id<SQLAndOrAddition>)inRange:(va_list)list;
+
 
 /**
  是否是正常的sql语句
