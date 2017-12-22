@@ -62,6 +62,20 @@
     
     va_start(list, value);
     
+    id<SQLAndOrAddition> z = [self inRangeWithList:list value:value];
+    
+    va_end(list);
+    
+    return z;
+}
+
+- (id<SQLAndOrAddition>)inRangeWithArray:(NSArray<id<SQLValueBinding>> *)array {
+    return [self appendCondition:[NSString stringWithFormat:@"IN (%@)", [array componentsJoinedByString:@", "]]];
+}
+
+- (id<SQLAndOrAddition>)inRangeWithList:(va_list)list value:(id<SQLValueBinding>)value {
+    
+    
     id obj;
     NSMutableArray *array = [NSMutableArray array];
     
@@ -74,13 +88,9 @@
         }
     }
     
-    va_end(list);
+    return [self appendCondition:[NSString stringWithFormat:@"IN (%@)", [array componentsJoinedByString:@", "]]];
     
-    return [self appendCondition:[NSString stringWithFormat:@"IN (%@)", [array componentsJoinedByString:@", "]]];
-}
-
-- (id<SQLAndOrAddition>)inRangeWithArray:(NSArray<id<SQLValueBinding>> *)array {
-    return [self appendCondition:[NSString stringWithFormat:@"IN (%@)", [array componentsJoinedByString:@", "]]];
+    
 }
 
 

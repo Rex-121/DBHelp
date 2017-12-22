@@ -79,9 +79,30 @@
     
     NSLog(@"%@", table.select.sqlExpression());
     
+    
+    NSLog(@"%@", [self testList:@"4", @"5", @5]);
+    
+    
+    
     CFAbsoluteTime tz = CFAbsoluteTimeGetCurrent();
 //    [self createDataBase];
     NSLog(@"%f", tz - t);
+}
+
+
+- (NSString *)testList:(NSString *)x, ... {
+    
+    va_list list;
+    
+    va_start(list, x);
+    
+    SQLTable *k = [SQLTable table:@"k"];
+    
+    [k.select.where(@"list") inRangeWithList:list value:x];
+    
+    va_end(list);
+    
+    return k.select.sqlExpression();
 }
 
 - (void)createDataBase {
