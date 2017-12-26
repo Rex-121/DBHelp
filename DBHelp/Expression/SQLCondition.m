@@ -70,7 +70,14 @@
 }
 
 - (id<SQLAndOrAddition>)inRangeWithArray:(NSArray<id<SQLValueBinding>> *)array {
-    return [self appendCondition:[NSString stringWithFormat:@"IN (%@)", [array componentsJoinedByString:@", "]]];
+    
+    NSMutableArray *a = [NSMutableArray array];
+    
+    for (id<SQLValueBinding>obj in array) {
+        [a addObject:obj.sqlValue];
+    }
+    
+    return [self appendCondition:[NSString stringWithFormat:@"IN (%@)", [a componentsJoinedByString:@", "]]];
 }
 
 - (id<SQLAndOrAddition>)inRangeWithList:(va_list)list value:(id<SQLValueBinding>)value {
