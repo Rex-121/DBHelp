@@ -23,3 +23,15 @@
 - (SQLCreation *(^)(void))tableIfNotExits;
 
 @end
+
+
+@interface SQLAlter : SQLExpression
+
++ (instancetype)alter:(NSString *)tableName;
+
+- (void (^)(NSString *newName))renameTo;
+
+- (SQLColumn *(^)(NSString *column, eSQLBindType bind))addColumn;
+
+
+@end

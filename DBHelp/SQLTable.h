@@ -74,6 +74,13 @@
 
 @end
 
+@interface SQLTable (Alter)
+
+/** 重命名 */
+@property (nonatomic, strong, readonly)SQLAlter *alter;
+
+@end
+
 
 
 

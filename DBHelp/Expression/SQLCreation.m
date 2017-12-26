@@ -33,10 +33,6 @@
 
 - (SQLColumn *(^)(NSString *, eSQLBindType))newColumn {
     return ^(NSString *c, eSQLBindType t) {
-        
-//        if (c == NULL) {
-//            return nil;
-//        }
 
         SQLColumn *column = [SQLColumn creatColumn:c bind:t table:self.tableName];
 
@@ -48,7 +44,7 @@
 
 
 
-- (NSString* )creat {
+- (NSString *)creat {
 
     NSString *statementSql = [SQLColumn getSqlExpression:self.columnArray withBind:YES];
     
@@ -78,5 +74,55 @@
         return self;
     };
 }
+
+@end
+
+@interface SQLAlter ()
+
+/**  */
+@property (nonatomic, strong)SQLColumn *column;
+
+/**  */
+@property (nonatomic, strong)NSString *reName;
+
+@end
+
+
+@implementation SQLAlter
+
++ (instancetype)alter:(NSString *)tableName {
+    return [[SQLAlter alloc]initWithTable:tableName];
+}
+
+- (void (^)(NSString *))renameTo {
+    return ^(NSString *r) {
+        _reName = r;
+    };
+}
+
+- (SQLColumn *(^)(NSString *, eSQLBindType))addColumn {
+    return ^(NSString *c, eSQLBindType t) {
+      
+        self.column = [SQLColumn creatColumn:c bind:t table:self.tableName];
+        
+        return self.column;
+    };
+}
+
+- (NSString *(^)(void))sqlExpression {
+    return ^() {
+      
+        NSString *sql = [NSString stringWithFormat:@"ALTER TABLE %@ ", self.tableName];
+        if (_reName.length) {
+            sql = [sql stringByAppendingFormat:@"RENAME TO %@", _reName];
+        }
+        
+        if (self.column) {
+            sql = [sql stringByAppendingFormat:@"ADD COLUMN %@", [SQLColumn sqlWithConstraintKey:self.column]];
+        }
+        return sql;
+    };
+}
+
 
 @end

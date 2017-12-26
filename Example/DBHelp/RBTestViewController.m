@@ -92,6 +92,12 @@
     NSLog(@"%@", [self testList:@"4", @"5", @5]);
     
     
+//    table2.alter.renameTo(@"table3");
+    
+//    NSLog(@"%@", table2.alter.sqlExpression());
+    
+    table2.alter.addColumn(@"45", eSQLBindTypeInteger).unique().notNull();
+    NSLog(@"%@", table2.alter.sqlExpression());
     
     CFAbsoluteTime tz = CFAbsoluteTimeGetCurrent();
     NSLog(@"%f", tz - t);

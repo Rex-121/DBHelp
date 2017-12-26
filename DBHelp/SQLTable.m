@@ -18,6 +18,7 @@
 @property (nonatomic, strong)SQLInsert *insertion;
 @property (nonatomic, strong)SQLUpdate *updating;
 @property (nonatomic, strong)SQLDelete *deleteC;
+@property (nonatomic, strong)SQLAlter *alterC;
 
 /**  */
 @property (nonatomic, assign)eSQLOperation operation;
@@ -72,6 +73,12 @@
     }
     return _deleteC;
 }
+- (SQLAlter *)alterC {
+    if (!_alterC) {
+        _alterC = [SQLAlter alter:_tableName];
+    }
+    return _alterC;
+}
 @end
 
 
@@ -113,6 +120,14 @@
 
 - (SQLDelete *)deleteColumn {
     return self.deleteC;
+}
+
+@end
+
+@implementation SQLTable (Alter)
+
+- (SQLAlter *)alter {
+    return self.alterC;
 }
 
 @end

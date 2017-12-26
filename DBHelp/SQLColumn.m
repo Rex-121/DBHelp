@@ -101,41 +101,7 @@
     };
 }
 
-+ (NSString *)getSqlExpression:(NSArray<SQLColumn *> *)columnSet withBind:(BOOL)withBind {
-    
-    
-    
-    NSMutableArray *array = [NSMutableArray array];
-    
-    [columnSet enumerateObjectsUsingBlock:^(SQLColumn * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (!withBind) {
-            [array addObject:obj.description];
-        }
-        else {
-            
-            NSString *sql = obj.valueDescription;
-            
-            if (obj.isPrimaryKey) {
-                sql = [sql stringByAppendingString:@" PRIMARY KEY"];
-            }
-            else if (obj.isUnique) {
-                sql = [sql stringByAppendingString:@" UNIQUE"];
-            }
-            
-            if (obj.notNullAble) {
-                sql = [sql stringByAppendingString:@" NOT NULL"];
-            }
-            if (obj.defaltV) {
-                sql = [sql stringByAppendingFormat:@" DEFAULT %@", obj.defaltV.sqlValue];
-            }
-            
-            [array addObject:sql];
-        }
-    }];
-    
-    return [array componentsJoinedByString:@", "];
-    
-}
+
 
 - (NSString *)valueDescription {
     NSString *typeString = [SQLColumn transType:_bind];
@@ -181,5 +147,59 @@
         self.defaltV = v;
         return self;
     };
+}
++ (NSString *)getSqlExpression:(NSArray<SQLColumn *> *)columnSet withBind:(BOOL)withBind {
+    
+    
+    
+    NSMutableArray *array = [NSMutableArray array];
+    
+    [columnSet enumerateObjectsUsingBlock:^(SQLColumn * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (!withBind) {
+            [array addObject:obj.description];
+        }
+        else {
+            
+            NSString *sql = [SQLColumn sqlWithConstraintKey:obj];
+            
+            //            if (obj.isPrimaryKey) {
+            //                sql = [sql stringByAppendingString:@" PRIMARY KEY"];
+            //            }
+            //            else if (obj.isUnique) {
+            //                sql = [sql stringByAppendingString:@" UNIQUE"];
+            //            }
+            //
+            //            if (obj.notNullAble) {
+            //                sql = [sql stringByAppendingString:@" NOT NULL"];
+            //            }
+            //            if (obj.defaltV) {
+            //                sql = [sql stringByAppendingFormat:@" DEFAULT %@", obj.defaltV.sqlValue];
+            //            }
+            
+            [array addObject:sql];
+        }
+    }];
+    
+    return [array componentsJoinedByString:@", "];
+    
+}
+
++ (NSString *)sqlWithConstraintKey:(SQLColumn *)obj {
+    NSString *sql = obj.valueDescription;
+    
+    if (obj.isPrimaryKey) {
+        sql = [sql stringByAppendingString:@" PRIMARY KEY"];
+    }
+    else if (obj.isUnique) {
+        sql = [sql stringByAppendingString:@" UNIQUE"];
+    }
+    
+    if (obj.notNullAble) {
+        sql = [sql stringByAppendingString:@" NOT NULL"];
+    }
+    if (obj.defaltV) {
+        sql = [sql stringByAppendingFormat:@" DEFAULT %@", obj.defaltV.sqlValue];
+    }
+    return sql;
 }
 @end

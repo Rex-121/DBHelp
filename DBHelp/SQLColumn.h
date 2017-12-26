@@ -55,8 +55,7 @@
 + (NSString *)transType:(eSQLBindType)type;
 
 
-///输出需要的sql语句
-+ (NSString *)getSqlExpression:(NSArray<SQLColumn *> *)columnSet withBind:(BOOL)withBind;
+
 
 
 /** 对应的值 */
@@ -64,6 +63,8 @@
 
 /** column = value  (sql语句) */
 @property (nonatomic, copy, readonly)NSString *valueDescription;
+
+
 
 
 @end
@@ -86,6 +87,10 @@
 
 /** 是否有默认值 */
 - (SQLColumn *(^)(id<SQLValueBinding>value))defaultValue;
+
+///输出需要的sql语句
++ (NSString *)getSqlExpression:(NSArray<SQLColumn *> *)columnSet withBind:(BOOL)withBind;
++ (NSString *)sqlWithConstraintKey:(SQLColumn *)obj;
 
 @end
 
