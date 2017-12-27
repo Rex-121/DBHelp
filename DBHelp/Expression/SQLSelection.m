@@ -17,9 +17,18 @@
 /** column as 别名 */
 @property (nonatomic, strong)NSString *asColumn;
 
+@property (nonatomic, strong)SQLOrderBy *orderByLimit;
+
 @end
 
 @implementation SQLSelection
+
+- (SQLOrderBy *)orderByLimit {
+    if (!_orderByLimit) {
+        _orderByLimit = [SQLOrderBy orderBY:self.tableName];
+    }
+    return _orderByLimit;
+}
 
 - (SQLSelection *(^)(NSString *))column {
     return ^(NSString *c) {
@@ -66,7 +75,11 @@
         }
         
         if (self.sqlWhere.isWhereWork) {
-            return [sql stringByAppendingFormat:@" %@;", self.sqlWhere.sqlExpression()];
+            sql = [sql stringByAppendingFormat:@" %@", self.sqlWhere.sqlExpression()];
+        }
+        
+        if (_orderByLimit) {
+            sql = [sql stringByAppendingFormat:@" %@", _orderByLimit.sqlExpression()];
         }
         
         return sql;
@@ -89,4 +102,15 @@
 
 
 
+@end
+
+@implementation SQLSelection (OrderBy)
+- (SQLOrderBy *(^)(NSString *))orderBy {
+    
+    return ^(NSString *c) {
+        self.orderByLimit.column = [SQLColumn column:c table:self.tableName];
+        return self.orderByLimit;
+    };
+    
+}
 @end

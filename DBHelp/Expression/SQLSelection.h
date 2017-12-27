@@ -7,6 +7,7 @@
 
 #import "SQLExpression.h"
 
+#import "SQLOrderBy.h"
 
 @interface SQLSelection : SQLSearchExpression
 
@@ -26,3 +27,9 @@
 
 @end
 
+@interface SQLSelection (OrderBy)
+
+/** 排序 */
+- (SQLOrderBy *(^)(NSString *column))orderBy;
+
+@end

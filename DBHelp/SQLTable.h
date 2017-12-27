@@ -15,6 +15,7 @@
 #import "SQLDelete.h"
 
 
+
 #import "NSValueBinding.h"
 
 @interface SQLTable : NSObject
@@ -80,6 +81,7 @@
 @property (nonatomic, strong, readonly)SQLAlter *alter;
 
 @end
+
 
 
 

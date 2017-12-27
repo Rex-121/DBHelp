@@ -20,6 +20,7 @@
 @property (nonatomic, strong)SQLDelete *deleteC;
 @property (nonatomic, strong)SQLAlter *alterC;
 
+
 /**  */
 @property (nonatomic, assign)eSQLOperation operation;
 
@@ -79,6 +80,7 @@
     }
     return _alterC;
 }
+
 @end
 
 
@@ -131,4 +133,6 @@
 }
 
 @end
+
+
 

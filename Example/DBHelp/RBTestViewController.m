@@ -102,6 +102,10 @@
     table2.alter.addColumn(@"45", eSQLBindTypeInteger).unique().notNull();
     NSLog(@"%@", table2.alter.sqlExpression());
     
+    
+    table2.select.orderBy(@"5").limit(3).offset(5).sequence(eSequenceDescend);
+    NSLog(@"%@", table2.select.sqlExpression());
+    
     CFAbsoluteTime tz = CFAbsoluteTimeGetCurrent();
     NSLog(@"%f", tz - t);
 }
