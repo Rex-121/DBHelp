@@ -31,6 +31,9 @@
 /** 是否有默认值 */
 @property (nonatomic, strong)id<SQLValueBinding>defaltV;
 
+/**  */
+@property (nonatomic, assign)BOOL isAutoIncrement;
+
 @end
 
 
@@ -142,6 +145,14 @@
         return self;
     };
 }
+
+- (SQLColumn *(^)(void))autoIncrement {
+    return ^() {
+        self.isAutoIncrement = YES;
+        return self;
+    };
+}
+
 - (SQLColumn *(^)(id<SQLValueBinding>))defaultValue {
     return ^(id<SQLValueBinding>v) {
         self.defaltV = v;
@@ -161,20 +172,6 @@
         else {
             
             NSString *sql = [SQLColumn sqlWithConstraintKey:obj];
-            
-            //            if (obj.isPrimaryKey) {
-            //                sql = [sql stringByAppendingString:@" PRIMARY KEY"];
-            //            }
-            //            else if (obj.isUnique) {
-            //                sql = [sql stringByAppendingString:@" UNIQUE"];
-            //            }
-            //
-            //            if (obj.notNullAble) {
-            //                sql = [sql stringByAppendingString:@" NOT NULL"];
-            //            }
-            //            if (obj.defaltV) {
-            //                sql = [sql stringByAppendingFormat:@" DEFAULT %@", obj.defaltV.sqlValue];
-            //            }
             
             [array addObject:sql];
         }
@@ -197,6 +194,11 @@
     if (obj.notNullAble) {
         sql = [sql stringByAppendingString:@" NOT NULL"];
     }
+    
+    if (obj.isAutoIncrement && (obj.bind == eSQLBindTypeInteger)) {
+        sql = [sql stringByAppendingString:@" AUTOINCREMENT"];
+    }
+    
     if (obj.defaltV) {
         sql = [sql stringByAppendingFormat:@" DEFAULT %@", obj.defaltV.sqlValue];
     }

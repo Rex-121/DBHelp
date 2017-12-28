@@ -85,6 +85,9 @@
 /** 值 是否为 唯一 */
 - (SQLColumn *(^)(void))unique;
 
+/** 自增 */
+- (SQLColumn *(^)(void))autoIncrement;
+
 /** 是否有默认值 */
 - (SQLColumn *(^)(id<SQLValueBinding>value))defaultValue;
 
