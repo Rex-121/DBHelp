@@ -46,7 +46,7 @@
     return ^(NSInteger l) {
         
         if (l > 0) {
-            _limitCount = [NSString stringWithFormat:@"%ld", l];
+            _limitCount = [NSString stringWithFormat:@"%ld", (long)l];
         }
         
         return self;
@@ -59,7 +59,7 @@
     return ^(NSInteger o) {
         
         if (o > 0) {
-            _offsetString = [NSString stringWithFormat:@"%ld", o];
+            _offsetString = [NSString stringWithFormat:@"%ld", (long)o];
         }
         
         return self;
