@@ -1,5 +1,5 @@
 PODS:
-  - DBHelp (0.1.3)
+  - DBHelp (0.1.4)
   - FMDB (2.7.2):
     - FMDB/standard (= 2.7.2)
   - FMDB/standard (2.7.2)
@@ -15,10 +15,10 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  DBHelp: ec5bd304f57754362018b21e2164bcce93b1f8b4
+  DBHelp: 3450a5b1105a1a7816e396883b739740d9df2363
   FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
   Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
 
 PODFILE CHECKSUM: 3157b4c70885fa21b2f2da7af0f6aa4614934e34
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.2.1

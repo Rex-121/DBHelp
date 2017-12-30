@@ -1,6 +1,5 @@
 # DBHelp
 
-[![CI Status](http://img.shields.io/travis/wzc5670594/DBHelp.svg?style=flat)](https://travis-ci.org/wzc5670594/DBHelp)
 [![Version](https://img.shields.io/cocoapods/v/DBHelp.svg?style=flat)](http://cocoapods.org/pods/DBHelp)
 [![License](https://img.shields.io/cocoapods/l/DBHelp.svg?style=flat)](http://cocoapods.org/pods/DBHelp)
 [![Platform](https://img.shields.io/cocoapods/p/DBHelp.svg?style=flat)](http://cocoapods.org/pods/DBHelp)
@@ -97,7 +96,7 @@ pod 'DBHelp'
 
 ## Author
 
-wzc5670594, 18511234520@163.com
+Ray, 18511234520@163.com
 
 ## License
 
