@@ -86,7 +86,7 @@
     id obj;
     NSMutableArray *array = [NSMutableArray array];
     
-    [array addObject:value];
+    [array addObject:value.sqlValue];
     
     while ((obj = va_arg(list, id))) {
         if ([obj conformsToProtocol:@protocol(SQLValueBinding)]) {

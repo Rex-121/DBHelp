@@ -78,7 +78,7 @@ NSLog(@"%@", table2.select.sqlExpression());
 ///SELECT * FROM table2 where 4 > 4 AND 5 IN (3, '4', 4555, 5) AND 4 > 5 AND 3 between 5 and 6;
 NSLog(@"%@", table2.select.sqlExpression());
 
-///SELECT * FROM k where list IN (4, '5', 5);
+///SELECT * FROM k where list IN ('4', '5', 5);
 NSLog(@"%@", [self testList:@"4", @"5", @5]);
 
 ```
