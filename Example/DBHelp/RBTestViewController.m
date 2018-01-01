@@ -91,7 +91,7 @@
     [table2.select.where(@"55") inRangeWithArray:@[@"fggg", @44]];
     
     NSLog(@"%@", table2.select.sqlExpression());
-    ///SELECT * FROM k where list IN (4, '5', 5);
+    ///SELECT * FROM k where list IN ('4', '5', 5);
     NSLog(@"%@", [self testList:@"4", @"5", @5]);
     
     
