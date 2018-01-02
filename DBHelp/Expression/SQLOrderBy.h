@@ -8,7 +8,9 @@
 #import "SQLExpression.h"
 
 typedef NS_ENUM(NSUInteger, eSequence) {
+    ///升序
     eSequenceAscending = 0,
+    ///降序
     eSequenceDescend,
 };
 
