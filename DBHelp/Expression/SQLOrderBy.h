@@ -18,7 +18,6 @@ typedef NS_ENUM(NSUInteger, eSequence) {
 
 + (SQLOrderBy *)orderBY:(NSString *)table;
 
-/**  */
 @property (nonatomic, strong)SQLColumn *column;
 
 - (SQLOrderBy *(^)(eSequence))sequence;

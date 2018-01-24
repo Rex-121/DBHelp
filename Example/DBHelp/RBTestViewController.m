@@ -26,7 +26,7 @@
     
     CFAbsoluteTime t = CFAbsoluteTimeGetCurrent();
     
-    SQLTable *table = [SQLTable table:@"table1"];
+    SQLTable *table = [SQLTable named:@"table1"];
     
     table.create.newColumn(@"id", eSQLBindTypeInteger).primaryKey();
     table.create.newColumn(@"name", eSQLBindTypeText).unique().notNull();
@@ -76,14 +76,14 @@
     
     
     
-    SQLTable *table2 = [SQLTable table:@"table2"];
+    SQLTable *table2 = [SQLTable named:@"table2"];
     
     table2.select.where(@"4").symbol(@">", @4).andCondition(@"k").equal(@"z").andCondition(@"4").symbol(@">", @5).andCondition(@"3").between(@5, @6);
     ///SELECT * FROM table2 where 4 > 4 AND k = 'z' AND 4 > 5 AND 3 between 5 and 6;
     NSLog(@"%@", table2.select.sqlExpression());
     
     
-    SQLTable *table3 = [SQLTable table:@"table3"];
+    SQLTable *table3 = [SQLTable named:@"table3"];
     [table3.select.where(@"4").symbol(@">", @4).andCondition(@"5") inRange:@3, @"4", @4555, @5, nil];
     ///SELECT * FROM table2 where 4 > 4 AND 5 IN (3, '4', 4555, 5) AND 4 > 5 AND 3 between 5 and 6;
     NSLog(@"%@", table3.select.sqlExpression());
@@ -117,7 +117,7 @@
     
     va_start(list, x);
     
-    SQLTable *k = [SQLTable table:@"k"];
+    SQLTable *k = [SQLTable named:@"k"];
     
     [k.select.where(@"list") inRangeWithList:list value:x];
     

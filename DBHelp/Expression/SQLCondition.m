@@ -7,10 +7,6 @@
 
 #import "SQLCondition.h"
 
-//@implementation SQLCondition
-//
-//@end
-
 @interface SQLWhere()
 
 /**  */

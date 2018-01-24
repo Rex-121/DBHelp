@@ -44,8 +44,6 @@
  */
 + (instancetype)creatColumn:(NSString *)column bind:(eSQLBindType)bind table:(NSString *)table;
 
-
-
 /**
  需要绑定的值类型
 
@@ -54,18 +52,11 @@
  */
 + (NSString *)transType:(eSQLBindType)type;
 
-
-
-
-
 /** 对应的值 */
 @property (nonatomic, strong)id<SQLValueBinding> value;
 
 /** column = value  (sql语句) */
 @property (nonatomic, copy, readonly)NSString *valueDescription;
-
-
-
 
 @end
 

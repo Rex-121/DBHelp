@@ -27,13 +27,7 @@
  @param table 表名
  @return 表
  */
-+ (instancetype)table:(NSString *)table;
-
-
-
-//- (SQLTable *(^)(NSString *))column;
-
-//- (SQLTable *)unique;
++ (instancetype)named:(NSString *)table;
 
 @end
 

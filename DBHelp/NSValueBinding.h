@@ -9,16 +9,22 @@
 
 #import "SQLBinding.h"
 
+#pragma mark - string
+
 @interface NSString (SQLBind)<SQLValueBinding>
 
-//@property (nonatomic, strong, readonly)NSString *sqlValue;
-
 @end
+
+
+#pragma mark - number
 
 @interface NSNumber (SQLBind)<SQLValueBinding>
 
 
 @end
+
+
+#pragma mark - null
 
 @interface NSNull (SQLBind)<SQLValueBinding>
 

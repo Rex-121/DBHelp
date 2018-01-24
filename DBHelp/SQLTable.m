@@ -27,14 +27,11 @@
 /** 最后一次指定的column */
 @property (nonatomic, strong)SQLColumn *choosenColumn;
 
-/**  */
-//@property (nonatomic, strong)NSMutableArray *columnArray;
-
 @end
 
 @implementation SQLTable
 
-+ (instancetype)table:(NSString *)table {
++ (instancetype)named:(NSString *)table {
     SQLTable *t = [SQLTable new];
     
     t.tableName = table;
