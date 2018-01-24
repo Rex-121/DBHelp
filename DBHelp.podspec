@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DBHelp'
-  s.version          = '0.1.4'
+  s.version          = '0.2.0'
   s.summary          = 'sql expression handle'
 
   s.description      = <<-DESC

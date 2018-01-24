@@ -9,6 +9,12 @@
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ```ruby
+
+支持 create, count, select, insert, update, delete, between ... in ... 等语句
+
+```
+
+```ruby
 SQLTable *table = [SQLTable table:@"table1"];
 
 table.create.newColumn(@"id", eSQLBindTypeInteger).primaryKey();
@@ -18,30 +24,39 @@ table.create.newColumn(@"company", eSQLBindTypeText).defaultValue(@"home");
 table.create.newColumn(@"createtime", eSQLBindTypeReal);
 
 ///创建表
-///CREATE TABLE table1 ( id INTEGER PRIMARY KEY, name TEXT UNIQUE NOT NULL, age INTEGER, company TEXT DEFAULT 'home', createtime REAL );
-NSLog(@"%@", table.create.sqlExpression());
+
+--> CREATE TABLE table1 ( id INTEGER PRIMARY KEY, name TEXT UNIQUE NOT NULL, age INTEGER, company TEXT DEFAULT 'home', createtime REAL ); <--
 
 ```
 
 
 ```ruby
-///select
+-- select
+
 table.select.where(@"age").equal(@28);
-///SELECT * FROM table1 where age = 28;
+
 NSLog(@"%@", table.select.sqlExpression());
+
+--> SELECT * FROM table1 where age = 28; <--
+
 ```
 ```ruby
-/// count
+-- count
+
 table.select.column(@"1").count.columnAsAlias(@"4", @"").columnAsAlias(@"3", @"3别名").where(@"2").between(@"1", @"3");
-///DBHelp_Example[2198:168639] SELECT COUNT(1, 4, 3 AS 3别名) FROM table1 where 2 between '1' and '3';
-NSLog(@"%@", table.select.sqlExpression());
+
+--> DBHelp_Example[2198:168639] SELECT COUNT(1, 4, 3 AS 3别名) FROM table1 where 2 between '1' and '3'; <--
+
 ```
 
 ```ruby
-///insert
+-- insert
+
 table.insert.columns(@"id", @"name", @"age", @"company", @"createtime", nil).values([NSNull null], @"Ray", @28, [NSNull null], @4145123.4, nil);
 ///INSERT INTO table1 ( id, name, age, company, createtime ) VALUES ( null, 'Ray', 28, null, 4145123.4 );
+
 NSLog(@"%@", table.insert.sqlExpression());
+
 ```
 
 ```ruby
@@ -55,7 +70,7 @@ table.update.set(@"4", @"update").set(@"56", @778).where(@"4").equal(@"f");
 NSLog(@"%@", table.update.sqlExpression());
 ```
 
-///delete
+
 ```ruby
 ///DELETE FROM table1
 NSLog(@"%@", table.deleteColumn.sqlExpression());
