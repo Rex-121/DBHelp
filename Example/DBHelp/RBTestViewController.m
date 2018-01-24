@@ -9,11 +9,8 @@
 #import "RBTestViewController.h"
 
 
-//#import <DBHelp/NSValueBinding.h>
 
 #import <DBHelp/SQLTable.h>
-
-#import <FMDB/FMDB.h>
 
 @interface RBTestViewController ()
 
@@ -125,27 +122,6 @@
     
     return k.select.sqlExpression();
 }
-
-//- (void)createDataBase {
-//    
-////    /Users/ray/Desktop
-//    
-//    FMDatabase *db = [FMDatabase databaseWithPath:@"/Users/ray/Desktop/test.db"];
-//    
-//    SQLTable *table = [SQLTable table:@"talbe1"];
-//    
-//    table.create.newColumn(@"id", eSQLBindTypeInteger).primaryKey();
-//    table.create.newColumn(@"name", eSQLBindTypeText).unique().notNull();
-//    table.create.column(@"age", eSQLBindTypeInteger);
-//    table.create.newColumn(@"company", eSQLBindTypeText).defaultValue(@"home");
-//    table.create.newColumn(@"createtime", eSQLBindTypeReal);
-//    
-//    [db open];
-//    [db executeStatements:table.create.sqlExpression()];
-//    [db close];
-//    
-//    
-//}
 
 - (void)dealloc {
     NSLog(@"%@", self);

@@ -379,12 +379,10 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-DBHelp_Example/Pods-DBHelp_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/DBHelp/DBHelp.framework",
-				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DBHelp.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
