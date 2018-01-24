@@ -8,98 +8,6 @@
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-```ruby
-
-支持 create, count, select, insert, update, delete, between ... in ... 等语句
-
-```
-
-```ruby
-SQLTable *table = [SQLTable table:@"table1"];
-
-table.create.newColumn(@"id", eSQLBindTypeInteger).primaryKey();
-table.create.newColumn(@"name", eSQLBindTypeText).unique().notNull();
-table.create.column(@"age", eSQLBindTypeInteger);
-table.create.newColumn(@"company", eSQLBindTypeText).defaultValue(@"home");
-table.create.newColumn(@"createtime", eSQLBindTypeReal);
-
-///创建表
-
---> CREATE TABLE table1 ( id INTEGER PRIMARY KEY, name TEXT UNIQUE NOT NULL, age INTEGER, company TEXT DEFAULT 'home', createtime REAL ); <--
-
-```
-
-
-```ruby
--- select
-
-table.select.where(@"age").equal(@28);
-
-NSLog(@"%@", table.select.sqlExpression());
-
---> SELECT * FROM table1 where age = 28; <--
-
-```
-```ruby
--- count
-
-table.select.column(@"1").count.columnAsAlias(@"4", @"").columnAsAlias(@"3", @"3别名").where(@"2").between(@"1", @"3");
-
---> DBHelp_Example[2198:168639] SELECT COUNT(1, 4, 3 AS 3别名) FROM table1 where 2 between '1' and '3'; <--
-
-```
-
-```ruby
--- insert
-
-table.insert.columns(@"id", @"name", @"age", @"company", @"createtime", nil).values([NSNull null], @"Ray", @28, [NSNull null], @4145123.4, nil);
-///INSERT INTO table1 ( id, name, age, company, createtime ) VALUES ( null, 'Ray', 28, null, 4145123.4 );
-
-NSLog(@"%@", table.insert.sqlExpression());
-
-```
-
-```ruby
-///update
-table.update.set(@"4", @"update").set(@"56", @4);
-///UPDATE table1 SET 4 = 'update', 56 = 4
-NSLog(@"%@", table.update.sqlExpression());
-
-table.update.set(@"4", @"update").set(@"56", @778).where(@"4").equal(@"f");
-///UPDATE table1 SET 4 = 'update', 56 = 778 where 4 = 'f'
-NSLog(@"%@", table.update.sqlExpression());
-```
-
-
-```ruby
-///DELETE FROM table1
-NSLog(@"%@", table.deleteColumn.sqlExpression());
-
-table.deleteColumn.where(@"4").symbol(@">", @4);
-///DELETE FROM table1 where 4 > 4
-NSLog(@"%@", table.deleteColumn.sqlExpression());
-```
-
-```ruby
-SQLTable *table2 = [SQLTable table:@"table2"];
-
-table2.select.where(@"4").symbol(@">", @4).andCondition(@"k").equal(@"z").andCondition(@"4").symbol(@">", @5).andCondition(@"3").between(@5, @6);
-///SELECT * FROM table2 where 4 > 4 AND k = 'z' AND 4 > 5 AND 3 between 5 and 6;
-NSLog(@"%@", table2.select.sqlExpression());
-
-
-
-[table2.select.where(@"4").symbol(@">", @4).andCondition(@"5") inRange:@3, @"4", @4555, @5, nil];
-///SELECT * FROM table2 where 4 > 4 AND 5 IN (3, '4', 4555, 5) AND 4 > 5 AND 3 between 5 and 6;
-NSLog(@"%@", table2.select.sqlExpression());
-
-///SELECT * FROM k where list IN ('4', '5', 5);
-NSLog(@"%@", [self testList:@"4", @"5", @5]);
-
-```
-
-## Requirements
-
 ## Installation
 
 DBHelp is available through [CocoaPods](http://cocoapods.org). To install
@@ -108,6 +16,94 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'DBHelp'
 ```
+
+## support
+```ruby
+
+支持 create, count, select, insert, update, delete, between ... and ... 等语句
+
+```
+
+### Create
+```ruby
+创建表
+SQLTable *table = [SQLTable table:@"table1"];
+
+table.create.column(@"age", eSQLBindTypeInteger);
+
+table.create.newColumn(@"id", eSQLBindTypeInteger).primaryKey();
+table.create.newColumn(@"name", eSQLBindTypeText).unique().notNull();
+table.create.newColumn(@"company", eSQLBindTypeText).defaultValue(@"home");
+table.create.newColumn(@"createtime", eSQLBindTypeReal);
+
+table.create.sqlExpression();
+--> CREATE TABLE table1 ( id INTEGER PRIMARY KEY, name TEXT UNIQUE NOT NULL, age INTEGER, company TEXT DEFAULT 'home', createtime REAL );
+```
+
+### Select
+```ruby
+table.select.where(@"age").equal(@28);
+
+table.select.sqlExpression();
+--> SELECT * FROM table1 where age = 28;
+```
+
+### Count
+```ruby
+table.select.column(@"name").count.columnAsAlias(@"height", @"").columnAsAlias(@"company", @"company别名").where(@"age").between(20, 27);
+
+table.select.sqlExpression();
+--> SELECT COUNT(name, height, company AS company别名) FROM table1 where age between 20 and 27;
+```
+
+### Insert
+```ruby
+table.insert.columns(@"id", @"name", @"age", @"company", @"createtime", nil).values([NSNull null], @"Ray", @28, [NSNull null], @4145123.4, nil);
+
+table.insert.sqlExpression();
+--> INSERT INTO table1 ( id, name, age, company, createtime ) VALUES ( null, 'Ray', 28, null, 4145123.4 );
+```
+
+### Update
+```ruby
+table.update.set(@"company", @"update").set(@"age", @24);
+table.update.sqlExpression();
+--> UPDATE table1 SET company = 'update', age = 24;
+```
+
+```ruby
+table.update.set(@"company", @"update").set(@"age", @5).where(@"name").equal(@"Ray");
+table.update.sqlExpression();
+--> UPDATE table1 SET company = 'update', age = 25 where name = 'Ray';
+```
+
+### Delete && Symbol
+```ruby
+table.deleteColumn.where(@"age").symbol(@">", @4);
+table.deleteColumn.sqlExpression();
+--> DELETE FROM table1 where age > 4;
+```
+
+### Conditions
+```ruby
+table.select.where(@"age").symbol(@">", @4).andCondition(@"name").equal(@"Ray").andCondition(@"salary").symbol(@">", @25000).andCondition(@"height").between(@150, @160);
+
+table.select.sqlExpression();
+--> SELECT * FROM table1 where age > 4 AND name = 'Ray' AND salary > 25000 AND 3 between 150 and 160;
+```
+
+```ruby
+[table.select.where(@"age").symbol(@">", @4).andCondition(@"height") inRange:@133, @144, @155, @166, nil];
+table.select.sqlExpression();
+--> SELECT * FROM table1 where age > 4 AND height IN (133, 144, 155, 166);
+```
+
+### Alter
+```ruby
+table.alter.addColumn(@"age", eSQLBindTypeInteger).unique().notNull();
+```
+
+
 
 ## Author
 

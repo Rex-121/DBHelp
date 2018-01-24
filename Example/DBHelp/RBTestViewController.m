@@ -83,10 +83,10 @@
     NSLog(@"%@", table2.select.sqlExpression());
     
     
-    
-    [table2.select.where(@"4").symbol(@">", @4).andCondition(@"5") inRange:@3, @"4", @4555, @5, nil];
+    SQLTable *table3 = [SQLTable table:@"table3"];
+    [table3.select.where(@"4").symbol(@">", @4).andCondition(@"5") inRange:@3, @"4", @4555, @5, nil];
     ///SELECT * FROM table2 where 4 > 4 AND 5 IN (3, '4', 4555, 5) AND 4 > 5 AND 3 between 5 and 6;
-    NSLog(@"%@", table2.select.sqlExpression());
+    NSLog(@"%@", table3.select.sqlExpression());
     
     [table2.select.where(@"55") inRangeWithArray:@[@"fggg", @44]];
     
