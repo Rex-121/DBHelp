@@ -13,19 +13,20 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 DBHelp is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
-```ruby
+```objective-c
 pod 'DBHelp'
 ```
 
 ## support
-```ruby
+
+```objective-c
 
 支持 create, count, select, insert, update, delete, between ... and ... 等语句
 
 ```
 
 ### Create
-```ruby
+```objective-c
 创建表
 SQLTable *table = [SQLTable table:@"table1"];
 
@@ -41,7 +42,7 @@ table.create.sqlExpression();
 ```
 
 ### Select
-```ruby
+```objective-c
 table.select.where(@"age").equal(@28);
 
 table.select.sqlExpression();
@@ -49,7 +50,7 @@ table.select.sqlExpression();
 ```
 
 ### Count
-```ruby
+```objective-c
 table.select.column(@"name").count.columnAsAlias(@"height", @"").columnAsAlias(@"company", @"company别名").where(@"age").between(20, 27);
 
 table.select.sqlExpression();
@@ -57,7 +58,7 @@ table.select.sqlExpression();
 ```
 
 ### Insert
-```ruby
+```objective-c
 table.insert.columns(@"id", @"name", @"age", @"company", @"createtime", nil).values([NSNull null], @"Ray", @28, [NSNull null], @4145123.4, nil);
 
 table.insert.sqlExpression();
@@ -65,41 +66,41 @@ table.insert.sqlExpression();
 ```
 
 ### Update
-```ruby
+```objective-c
 table.update.set(@"company", @"update").set(@"age", @24);
 table.update.sqlExpression();
 --> UPDATE table1 SET company = 'update', age = 24;
 ```
 
-```ruby
+```objective-c
 table.update.set(@"company", @"update").set(@"age", @5).where(@"name").equal(@"Ray");
 table.update.sqlExpression();
 --> UPDATE table1 SET company = 'update', age = 25 where name = 'Ray';
 ```
 
 ### Delete && Symbol
-```ruby
+```objective-c
 table.deleteColumn.where(@"age").symbol(@">", @4);
 table.deleteColumn.sqlExpression();
 --> DELETE FROM table1 where age > 4;
 ```
 
 ### Conditions
-```ruby
+```objective-c
 table.select.where(@"age").symbol(@">", @4).andCondition(@"name").equal(@"Ray").andCondition(@"salary").symbol(@">", @25000).andCondition(@"height").between(@150, @160);
 
 table.select.sqlExpression();
 --> SELECT * FROM table1 where age > 4 AND name = 'Ray' AND salary > 25000 AND 3 between 150 and 160;
 ```
 
-```ruby
+```objective-c
 [table.select.where(@"age").symbol(@">", @4).andCondition(@"height") inRange:@133, @144, @155, @166, nil];
 table.select.sqlExpression();
 --> SELECT * FROM table1 where age > 4 AND height IN (133, 144, 155, 166);
 ```
 
 ### Alter
-```ruby
+```objective-c
 table.alter.addColumn(@"age", eSQLBindTypeInteger).unique().notNull();
 ```
 
