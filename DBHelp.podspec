@@ -9,28 +9,23 @@
 Pod::Spec.new do |s|
   s.name             = 'DBHelp'
   s.version          = '0.2.1'
-  s.summary          = 'sql expression handle'
+  s.summary          = 'sql语句生成'
 
   s.description      = <<-DESC
-DBHelp helps me to handle sql expression
+DBHelp helps to handle sql expression.
+sql语句生成.
                        DESC
 
   s.homepage         = 'https://github.com/wzc5670594/DBHelp'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'wzc5670594' => '18511234520@163.com' }
+
+
+  s.author           = { 'Ray' => 'ray_wzc@163.com' }
   s.source           = { :git => 'https://github.com/wzc5670594/DBHelp.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'DBHelp/**/*'
-  
-  # s.resource_bundles = {
-  #   'DBHelp' => ['DBHelp/Assets/*.png']
-  # }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+# s.license          = { :type => 'MIT', :file => 'LICENSE' }
+
 end
