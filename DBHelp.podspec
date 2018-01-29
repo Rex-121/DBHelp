@@ -26,6 +26,6 @@ sql语句生成.
 
   s.source_files = 'DBHelp/**/*'
 
-# s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.license          = { :type => 'MIT', :file => 'LICENSE' }
 
 end
