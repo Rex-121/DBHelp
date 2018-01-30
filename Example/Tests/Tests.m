@@ -31,14 +31,7 @@ describe(@"My initial tests", ^{
           
       });
 
-//      it(@"can read", ^{
-//          [[@"number" should] equal:@"string"];
-//      });
-//
-//      it(@"will wait and fail", ^{
-//          NSObject *object = [[NSObject alloc] init];
-//          [[expectFutureValue(object) shouldEventually] receive:@selector(autoContentAccessingProxy)];
-//      });
+
   });
 
   context(@"will pass", ^{
