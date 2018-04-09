@@ -29,10 +29,10 @@
         
         switch (s) {
             case eSequenceAscending:
-                _sequenceString = @"ASC";
+                self.sequenceString = @"ASC";
                 break;
             case eSequenceDescend:
-                _sequenceString = @"DESC";
+                self.sequenceString = @"DESC";
                 break;
         }
         
@@ -46,7 +46,7 @@
     return ^(NSInteger l) {
         
         if (l > 0) {
-            _limitCount = [NSString stringWithFormat:@"%ld", (long)l];
+            self.limitCount = [NSString stringWithFormat:@"%ld", (long)l];
         }
         
         return self;
@@ -59,7 +59,7 @@
     return ^(NSInteger o) {
         
         if (o > 0) {
-            _offsetString = [NSString stringWithFormat:@"%ld", (long)o];
+            self.offsetString = [NSString stringWithFormat:@"%ld", (long)o];
         }
         
         return self;
@@ -75,16 +75,16 @@
         
         NSString *orderBy = [NSString stringWithFormat:@"ORDER BY %@", self.column.description];
         
-        if (_sequenceString.length) {
-            orderBy = [orderBy stringByAppendingFormat:@" %@", _sequenceString];
+        if (self.sequenceString.length) {
+            orderBy = [orderBy stringByAppendingFormat:@" %@", self.sequenceString];
         }
         
-        if (_limitCount.length) {
-            orderBy = [orderBy stringByAppendingFormat:@" LIMIT %@", _limitCount];
+        if (self.limitCount.length) {
+            orderBy = [orderBy stringByAppendingFormat:@" LIMIT %@", self.limitCount];
         }
         
-        if (_offsetString.length) {
-            orderBy = [orderBy stringByAppendingFormat:@" OFFSET %@;", _offsetString];
+        if (self.offsetString.length) {
+            orderBy = [orderBy stringByAppendingFormat:@" OFFSET %@;", self.offsetString];
         }
         
         

@@ -66,7 +66,7 @@
         
         NSString *sql = @"";
         
-        if (_doCount) {
+        if (self->_doCount) {
             ///如果是统计数目
             sql = [NSString stringWithFormat:@"SELECT COUNT(%@) FROM %@", select, self.tableName];
         }
@@ -78,8 +78,8 @@
             sql = [sql stringByAppendingFormat:@" %@", self.sqlWhere.sqlExpression()];
         }
         
-        if (_orderByLimit) {
-            sql = [sql stringByAppendingFormat:@" %@", _orderByLimit.sqlExpression()];
+        if (self.orderByLimit) {
+            sql = [sql stringByAppendingFormat:@" %@", self.orderByLimit.sqlExpression()];
         }
         
         return sql;
