@@ -96,7 +96,7 @@
 
 - (void (^)(NSString *))renameTo {
     return ^(NSString *r) {
-        _reName = r;
+        self->_reName = r;
     };
 }
 
@@ -113,8 +113,8 @@
     return ^() {
       
         NSString *sql = [NSString stringWithFormat:@"ALTER TABLE %@ ", self.tableName];
-        if (_reName.length) {
-            sql = [sql stringByAppendingFormat:@"RENAME TO %@", _reName];
+        if (self->_reName.length) {
+            sql = [sql stringByAppendingFormat:@"RENAME TO %@", self->_reName];
         }
         
         if (self.column) {

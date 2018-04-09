@@ -90,7 +90,7 @@
 
 - (NSString *(^)(void))sqlExpression {
     return ^() {
-        if (_value == nil) {
+        if (self->_value == nil) {
             return self.description;
         }
         return [NSString stringWithFormat:@"%@ = %@", self.name, self.value.sqlValue];
@@ -99,7 +99,7 @@
 
 - (id (^)(NSString *))table {
     return ^(NSString *t) {
-        _tableName = t;
+        self->_tableName = t;
         return self;
     };
 }

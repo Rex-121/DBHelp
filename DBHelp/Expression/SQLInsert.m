@@ -77,7 +77,7 @@
                 }
             }
             
-            _sqlValues = [array componentsJoinedByString:@", "];
+            self->_sqlValues = [array componentsJoinedByString:@", "];
             
         }
         

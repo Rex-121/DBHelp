@@ -177,11 +177,11 @@
 - (NSString *(^)(void))sqlExpression {
     return ^() {
       
-        if (_sqlWhere.isWhereWork) {
+        if (self->_sqlWhere.isWhereWork) {
             
             NSString *condition = self.isAndCondition ? @"AND" : @"OR";
             
-            NSString *sql = [_sqlWhere.sqlExpression() stringByReplacingOccurrencesOfString:@"where " withString:@""];
+            NSString *sql = [self->_sqlWhere.sqlExpression() stringByReplacingOccurrencesOfString:@"where " withString:@""];
             
             return [NSString stringWithFormat:@" %@ %@", condition,  sql];
         }
